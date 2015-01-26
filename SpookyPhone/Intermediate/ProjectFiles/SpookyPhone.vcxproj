@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup Label="ProjectConfigurations">
+		<ProjectConfiguration Include="DebugGame_Game|x64">
+			<Configuration>DebugGame_Game</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="DebugGame_Game|Win32">
+			<Configuration>DebugGame_Game</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="DebugGame_Editor|x64">
+			<Configuration>DebugGame_Editor</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="DebugGame_Editor|Win32">
+			<Configuration>DebugGame_Editor</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Development_Game|x64">
+			<Configuration>Development_Game</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Development_Game|Win32">
+			<Configuration>Development_Game</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Development_Editor|x64">
+			<Configuration>Development_Editor</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Development_Editor|Win32">
+			<Configuration>Development_Editor</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Shipping_Game|x64">
+			<Configuration>Shipping_Game</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Shipping_Game|Win32">
+			<Configuration>Shipping_Game</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\SpookyPhone.uproject" />
+		<None Include="..\..\Source\SpookyPhone.Target.cs" />
+		<None Include="..\..\Source\SpookyPhoneEditor.Target.cs" />
+		<None Include="..\..\Config\DefaultEditor.ini" />
+		<None Include="..\..\Config\DefaultEngine.ini" />
+		<None Include="..\..\Source\SpookyPhone\SpookyPhone.Build.cs" />
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhone.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhone.h" />
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.h" />
+		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc" />
+	</ItemGroup>
+	<PropertyGroup Label="Globals">
+		<ProjectGuid>{FB47E145-8949-43E4-A868-EC3DB94D24E2}</ProjectGuid>
+		<Keyword>MakeFileProj</Keyword>
+		<RootNamespace>SpookyPhone</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Game|x64'" Label="Configuration">
+		<ConfigurationType>Makefile</ConfigurationType>
+		<PlatformToolset>v120</PlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Editor|x64'" Label="Configuration">
+		<ConfigurationType>Makefile</ConfigurationType>
+		<PlatformToolset>v120</PlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development_Game|x64'" Label="Configuration">
+		<ConfigurationType>Makefile</ConfigurationType>
+		<PlatformToolset>v120</PlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development_Editor|x64'" Label="Configuration">
+		<ConfigurationType>Makefile</ConfigurationType>
+		<PlatformToolset>v120</PlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping_Game|Win32'" Label="Configuration">
+		<ConfigurationType>Makefile</ConfigurationType>
+		<PlatformToolset>v120</PlatformToolset>
+	</PropertyGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+	<ImportGroup Label="ExtensionSettings" />
+	<PropertyGroup Label="UserMacros" />
+	<ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Game|x64'" Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Game|x64'">
+		<IncludePath />
+		<ReferencePath />
+		<LibraryPath />
+		<LibraryWPath />
+		<SourcePath />
+		<ExcludePath />
+		<OutDir>$(ProjectDir)..\Build\Unused\</OutDir>
+		<IntDir>$(ProjectDir)..\Build\Unused\</IntDir>
+		<NMakeBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Build.bat" SpookyPhone Win64 DebugGame "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeBuildCommandLine>
+		<NMakeReBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Rebuild.bat" SpookyPhone Win64 DebugGame "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeReBuildCommandLine>
+		<NMakeCleanCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Clean.bat" SpookyPhone Win64 DebugGame "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeCleanCommandLine>
+		<NMakeOutput>..\..\Binaries\Win64\SpookyPhone-Win64-DebugGame.exe</NMakeOutput>
+	</PropertyGroup>
+	<ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Editor|x64'" Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Editor|x64'">
+		<IncludePath />
+		<ReferencePath />
+		<LibraryPath />
+		<LibraryWPath />
+		<SourcePath />
+		<ExcludePath />
+		<OutDir>$(ProjectDir)..\Build\Unused\</OutDir>
+		<IntDir>$(ProjectDir)..\Build\Unused\</IntDir>
+		<NMakeBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Build.bat" SpookyPhoneEditor Win64 DebugGame "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeBuildCommandLine>
+		<NMakeReBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Rebuild.bat" SpookyPhoneEditor Win64 DebugGame "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeReBuildCommandLine>
+		<NMakeCleanCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Clean.bat" SpookyPhoneEditor Win64 DebugGame "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeCleanCommandLine>
+		<NMakeOutput>E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Binaries\Win64\UE4Editor.exe</NMakeOutput>
+	</PropertyGroup>
+	<ImportGroup Condition="'$(Configuration)|$(Platform)'=='Development_Game|x64'" Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development_Game|x64'">
+		<IncludePath />
+		<ReferencePath />
+		<LibraryPath />
+		<LibraryWPath />
+		<SourcePath />
+		<ExcludePath />
+		<OutDir>$(ProjectDir)..\Build\Unused\</OutDir>
+		<IntDir>$(ProjectDir)..\Build\Unused\</IntDir>
+		<NMakeBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Build.bat" SpookyPhone Win64 Development "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeBuildCommandLine>
+		<NMakeReBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Rebuild.bat" SpookyPhone Win64 Development "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeReBuildCommandLine>
+		<NMakeCleanCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Clean.bat" SpookyPhone Win64 Development "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeCleanCommandLine>
+		<NMakeOutput>..\..\Binaries\Win64\SpookyPhone.exe</NMakeOutput>
+	</PropertyGroup>
+	<ImportGroup Condition="'$(Configuration)|$(Platform)'=='Development_Editor|x64'" Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development_Editor|x64'">
+		<IncludePath />
+		<ReferencePath />
+		<LibraryPath />
+		<LibraryWPath />
+		<SourcePath />
+		<ExcludePath />
+		<OutDir>$(ProjectDir)..\Build\Unused\</OutDir>
+		<IntDir>$(ProjectDir)..\Build\Unused\</IntDir>
+		<NMakeBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Build.bat" SpookyPhoneEditor Win64 Development "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeBuildCommandLine>
+		<NMakeReBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Rebuild.bat" SpookyPhoneEditor Win64 Development "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeReBuildCommandLine>
+		<NMakeCleanCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Clean.bat" SpookyPhoneEditor Win64 Development "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeCleanCommandLine>
+		<NMakeOutput>E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Binaries\Win64\UE4Editor.exe</NMakeOutput>
+	</PropertyGroup>
+	<ImportGroup Condition="'$(Configuration)|$(Platform)'=='Shipping_Game|Win32'" Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping_Game|Win32'">
+		<IncludePath />
+		<ReferencePath />
+		<LibraryPath />
+		<LibraryWPath />
+		<SourcePath />
+		<ExcludePath />
+		<OutDir>$(ProjectDir)..\Build\Unused\</OutDir>
+		<IntDir>$(ProjectDir)..\Build\Unused\</IntDir>
+		<NMakeBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Build.bat" SpookyPhone Win32 Shipping "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeBuildCommandLine>
+		<NMakeReBuildCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Rebuild.bat" SpookyPhone Win32 Shipping "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeReBuildCommandLine>
+		<NMakeCleanCommandLine>"E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Build\BatchFiles\Clean.bat" SpookyPhone Win32 Shipping "$(SolutionDir)$(ProjectName).uproject" -rocket</NMakeCleanCommandLine>
+		<NMakeOutput>..\..\Binaries\Win32\SpookyPhone-Win32-Shipping.exe</NMakeOutput>
+	</PropertyGroup>
+	<PropertyGroup>
+		<NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);UE_GAME=1;IS_PROGRAM=0;UE_ROCKET=1;UNICODE;_UNICODE;__UNREAL__;IS_MONOLITHIC=1;WITH_ENGINE=1;WITH_UNREAL_DEVELOPER_TOOLS=0;WITH_COREUOBJECT=1;USE_STATS_WITHOUT_ENGINE=0;WITH_PLUGIN_SUPPORT=0;USE_LOGGING_IN_SHIPPING=0;UE_BUILD_MINIMAL=1;WITH_EDITOR=1;WITH_EDITORONLY_DATA=0;WITH_SERVER_CODE=1;UBT_COMPILED_PLATFORM=Win64;WIN32=1;_WIN32_WINNT=0x0600;WINVER=0x0600;PLATFORM_WINDOWS=1;NDEBUG=1;UE_BUILD_DEVELOPMENT=1;UE_ENGINE_DIRECTORY=E:/Program Files/Unreal4/Unreal Engine/4.6/Engine/;UE_PROJECT_NAME=SpookyPhone;ORIGINAL_FILE_NAME="SpookyPhone.exe";DEPRECATED_FORGAME=DEPRECATED;SPOOKYPHONE_API=;UE_ENABLE_ICU=1;WITH_STEAMWORKS=1;WITH_DIRECTXMATH=0;CORE_API=;COREUOBJECT_API=;WITH_PHYSX=1;WITH_APEX=1;WITH_RUNTIME_PHYSICS_COOKING;WITH_BOX2D=1;WITH_RECAST=1;ENGINE_API=;JSON_API=;WITH_FREETYPE=1;SLATE_API=;INPUTCORE_API=;SLATECORE_API=;MESSAGING_API=;RENDERCORE_API=;RHI_API=;SHADERCORE_API=;ASSETREGISTRY_API=;ENGINEMESSAGES_API=;ENGINESETTINGS_API=;SYNTHBENCHMARK_API=;RENDERER_API=;AIMODULE_API=;VECTORVM_API=;DATABASESUPPORT_API=;UE_EDITOR=1;UNREALED_API=;BSPMODE_API=;DOCUMENTATION_API=;PROJECTS_API=;SANDBOXFILE_API=;EDITORSTYLE_API=;SOURCECONTROL_API=;UNREALEDMESSAGES_API=;BLUEPRINTGRAPH_API=;XAUDIO2_API=;USERFEEDBACK_API=;COLLECTIONMANAGER_API=;NIAGARAEDITOR_API=;GRAPHEDITOR_API=;INTROTUTORIALS_API=;LEVELEDITOR_API=;SETTINGS_API=;KISMET_API=</NMakePreprocessorDefinitions>
+		<NMakeIncludeSearchPath>$(NMakeIncludeSearchPath);E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source;..\..\Source;..\Build\Win64\SpookyPhone\Inc\SpookyPhone;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Internationalization;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Async;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Concurrency;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Containers;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Delegates;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\GenericPlatform;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\HAL;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Logging;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Math;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Misc;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Modules;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Modules\Boilerplate;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\ProfilingDebugging;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Serialization;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Serialization\Json;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Serialization\Csv;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Stats;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Templates;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\UObject;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core\Public\Windows;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Core;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\CoreUObject;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject\Public\Blueprint;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject\Public\Misc;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject\Public\Serialization;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject\Public\Templates;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject\Public\UObject;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\CoreUObject;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Engine;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\AI;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\EdGraph;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\Features;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\Net;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\Slate;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\Tests;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\VisualLogger;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine\Public\AI\Navigation;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Json;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Json\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Json\Public\Dom;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Json\Public\Policies;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Json\Public\Serialization;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Json;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Slate;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Application;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Commands;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Docking;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Layout;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\MultiBox;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Notifications;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Styling;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Text;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Views;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Text\Android;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Framework\Text\IOS;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Colors;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Docking;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Images;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Input;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Layout;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Navigation;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Notifications;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Text;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate\Public\Widgets\Views;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\InputCore\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\InputCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\InputCore\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\InputCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\SlateCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Animation;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Application;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Brushes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Fonts;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Input;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Layout;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Logging;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Rendering;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Sound;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Styling;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Textures;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Types;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore\Public\Widgets;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SlateCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Slate;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Messaging;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Messaging\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Messaging\Public\Deprecated;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Messaging\Public\Helpers;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Messaging;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\RenderCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\RenderCore\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\RenderCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\RHI;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\RHI\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\RHI;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\ShaderCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\ShaderCore\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\ShaderCore;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\AssetRegistry;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\AssetRegistry\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\AssetRegistry;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\EngineMessages\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\EngineMessages;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\EngineMessages\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\EngineMessages;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\EngineSettings\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\EngineSettings;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\EngineSettings\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\EngineSettings;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\SynthBenchmark;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\SynthBenchmark\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Renderer;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Renderer\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Renderer;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\SynthBenchmark;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\AIModule\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\AIModule\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\AIModule;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\AIModule;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\VectorVM;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\VectorVM\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\VectorVM;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\DatabaseSupport;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\DatabaseSupport\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\DatabaseSupport;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Engine;..\..\Source\SpookyPhone;..\Build\Win64\Inc\SpookyPhone;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Programs\UnrealLightmass\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\UnrealEd;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\Commandlets;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\Dialogs;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\DragAndDrop;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\Features;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\Kismet2;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\Layers;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\Tests;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd\Public\Toolkits;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\BspMode;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\BspMode\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\BspMode;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Documentation;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\Documentation\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\Documentation;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Projects;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Projects\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Projects\Public\Interfaces;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Projects;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\SandboxFile;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SandboxFile\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\SandboxFile;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\EditorStyle;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\EditorStyle\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\EditorStyle\Public\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\EditorStyle\Public\Interfaces;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\EditorStyle;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\SourceControl;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\SourceControl\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\SourceControl\Public\Tests;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\SourceControl;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEdMessages\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\UnrealEdMessages;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEdMessages\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEdMessages;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\BlueprintGraph\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\BlueprintGraph;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\BlueprintGraph\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\BlueprintGraph;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\XAudio2;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Windows\XAudio2\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Runtime\Windows\XAudio2;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\UserFeedback;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UserFeedback\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UserFeedback;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\CollectionManager;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\CollectionManager\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\CollectionManager;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\NiagaraEditor;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\NiagaraEditor\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\GraphEditor;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\GraphEditor\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\IntroTutorials;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\IntroTutorials\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\IntroTutorials;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\GraphEditor;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\LevelEditor;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\LevelEditor\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Settings;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\Settings\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Developer\Settings;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\LevelEditor;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\NiagaraEditor;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\UnrealEd;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\Kismet\Classes;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Intermediate\Build\Win64\Inc\Kismet;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\Kismet\Public;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\Kismet\Public\WorkflowOrientedApp;E:\Program Files\Unreal4\Unreal Engine\4.6\Engine\Source\Editor\Kismet;C:\Program Files (x86)\VC\INCLUDE;C:\Program Files (x86)\Windows Kits\8.1\include\shared;C:\Program Files (x86)\Windows Kits\8.1\include\um;C:\Program Files (x86)\Windows Kits\8.1\include\winrt;;</NMakeIncludeSearchPath>
+		<NMakeForcedIncludes>$(NMakeForcedIncludes)</NMakeForcedIncludes>
+		<NMakeAssemblySearchPath>$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+		<NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
+	</PropertyGroup>
+	<ItemDefinitionGroup>
+	</ItemDefinitionGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+	<ImportGroup Label="ExtensionTargets">
+	</ImportGroup>
+</Project>
