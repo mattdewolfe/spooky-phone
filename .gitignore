@@ -1,0 +1,22 @@
+#Ignored files for Unreal 4 Code Project
+
+#VS Files we can ignore
+*.lastbuildstate
+*.opensdf
+*.sdf
+*.suo
+*.pdb
+
+#Files that will be built by the engine
+Test3/Binaries/
+Test3/DerivedDataCache/
+Test3/Intermediate/Build/
+Test3/Saved/
+
+*.bin
+*.dll
+*.lib
+*.manifest
+*.response
+
+
