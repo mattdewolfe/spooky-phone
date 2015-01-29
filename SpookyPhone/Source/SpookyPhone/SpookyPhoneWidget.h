@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "SpookyPhoneWidget.generated.h"
 

@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "SpookyPhoneWidget.h"
+
 #include "GameFramework/Actor.h"
 #include "SpookyPhoneActor.generated.h"
 
@@ -29,6 +31,9 @@ private:
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Material)
 	UMaterial* m_screenMaterial;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = UMG)
+	USpookyPhoneWidget* m_umgPhoneUI;
 
 	int32 m_numApps;
 };

@@ -49,15 +49,19 @@
 		<None Include="..\..\Source\SpookyPhoneEditor.Target.cs" />
 		<None Include="..\..\Config\DefaultEditor.ini" />
 		<None Include="..\..\Config\DefaultEngine.ini" />
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyGameMode.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyGameMode.h" />
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPawn.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPawn.h" />
 		<None Include="..\..\Source\SpookyPhone\SpookyPhone.Build.cs" />
 		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhone.cpp" />
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhone.h" />
 		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhoneActor.cpp" />
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneActor.h" />
-		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.cpp" />
-		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.h" />
 		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhoneWidget.cpp" />
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneWidget.h" />
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPlayerController.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPlayerController.h" />
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc" />
 	</ItemGroup>
 	<PropertyGroup Label="Globals">
