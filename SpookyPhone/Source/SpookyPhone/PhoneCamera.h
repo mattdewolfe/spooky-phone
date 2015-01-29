@@ -15,10 +15,10 @@
 #include "PhoneCamera.generated.h"
 
 //typedefing shared pointers to Textures for pictures.
-typedef std::shared_ptr<UTexture*> texturePTR;
+typedef std::shared_ptr<UTextureRenderTarget2D*> texturePTR;
 
 UCLASS()
-class CAMERA_API APhoneCamera : public ASceneCapture2D
+class SPOOKYPHONE_API APhoneCamera : public ASceneCapture2D
 {
 	GENERATED_BODY()
 
@@ -30,18 +30,18 @@ private:
 	// NORMAL - standard camera, no changes.
 	// NIGHTVISION - mostly dark, highlights spec as green, reflects certain things especially?
 	// SPOOKY - reveals hidden 'spooky' things, including hints and general fuckery. 
-	enum FilterType { NORMAL, NIGHTVISION, SPOOKY};
-	//keeps track of filters that can be applied to camera as needed; affects the playback/tint or whatnot.
-	FilterType currentFilter; 
+	enum FilterType { NORMAL, NIGHTVISION, SPOOKY };
+	//keeps track of filters that can be applied to camera as needed; affects the playback/tint or whatnot.d
+	FilterType currentFilter;
 protected:
 	//
 public:
 	//constructor.
-		//maybe takes in what it is going to be locked to and its render target. 
-	void BeginPlay() override; 
+	//maybe takes in what it is going to be locked to and its render target. 
+	void BeginPlay() override;
 	//destructore. 
-		//flushes out that vector, anything else this happens to store. 
-	void BeginDestroy() override; 
+	//flushes out that vector, anything else this happens to store. 
+	void BeginDestroy() override;
 
 	//changes the display mode to another filter type. 
 	void SwitchFilter(FilterType _new);
