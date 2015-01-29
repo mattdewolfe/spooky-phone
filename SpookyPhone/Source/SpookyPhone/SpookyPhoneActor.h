@@ -3,6 +3,7 @@
 #pragma once
 
 #include "SpookyPhoneWidget.h"
+#include "PhoneCamera.h"
 
 #include "GameFramework/Actor.h"
 #include "SpookyPhoneActor.generated.h"
@@ -39,7 +40,7 @@ private:
 	USpookyPhoneWidget* m_umgPhoneUI;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
-	USceneCaptureComponent2D* m_sceneCapture2D;
+	UChildActorComponent* m_phoneCamera;
 
 	int32 m_numApps;
 };

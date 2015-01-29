@@ -4,11 +4,7 @@
 	<ItemGroup>
 		<None Include="..\..\SpookyPhone.uproject" />
 		<Filter Include="Source">
-<<<<<<< HEAD
-			<UniqueIdentifier>{5ECC8AD8-872F-4C76-AE1B-37FB40230A59}</UniqueIdentifier>
-=======
-			<UniqueIdentifier>{0C226615-C4C1-4A94-A219-53ADC37C9E9F}</UniqueIdentifier>
->>>>>>> origin/jk-phone-interface
+			<UniqueIdentifier>{DA383B11-B7B2-4D6C-804A-CE111E1C4653}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone.Target.cs">
 			<Filter>Source</Filter>
@@ -17,11 +13,7 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
-<<<<<<< HEAD
-			<UniqueIdentifier>{D4CB9997-6918-45EE-9014-A692CC9DD406}</UniqueIdentifier>
-=======
-			<UniqueIdentifier>{07E0F9E9-008E-4595-BB14-988478361C10}</UniqueIdentifier>
->>>>>>> origin/jk-phone-interface
+			<UniqueIdentifier>{C66ABF2C-B5B9-4456-A594-AC8BAEED9839}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -29,17 +21,18 @@
 		<None Include="..\..\Config\DefaultEngine.ini">
 			<Filter>Config</Filter>
 		</None >
+		<None Include="..\..\Config\DefaultInput.ini">
+			<Filter>Config</Filter>
+		</None >
 		<Filter Include="Source\SpookyPhone">
-<<<<<<< HEAD
-			<UniqueIdentifier>{44671654-7952-477E-B63F-F46EC093FB2B}</UniqueIdentifier>
+			<UniqueIdentifier>{AFCE15E6-2B10-46E8-8308-1763D0F220F6}</UniqueIdentifier>
 		</Filter>
 		<ClCompile Include="..\..\Source\SpookyPhone\PhoneCamera.cpp">
 			<Filter>Source\SpookyPhone</Filter>
 		</ClCompile >
 		<ClInclude Include="..\..\Source\SpookyPhone\PhoneCamera.h">
-=======
-			<UniqueIdentifier>{499D52C5-EBBB-4A53-8C1C-19FC0B7629E0}</UniqueIdentifier>
-		</Filter>
+			<Filter>Source\SpookyPhone</Filter>
+		</ClInclude >
 		<ClCompile Include="..\..\Source\SpookyPhone\SpookyGameMode.cpp">
 			<Filter>Source\SpookyPhone</Filter>
 		</ClCompile >
@@ -50,7 +43,6 @@
 			<Filter>Source\SpookyPhone</Filter>
 		</ClCompile >
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPawn.h">
->>>>>>> origin/jk-phone-interface
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
 		<None Include="..\..\Source\SpookyPhone\SpookyPhone.Build.cs">
@@ -81,17 +73,10 @@
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
 		<Filter Include="Source\SpookyPhone\Resources">
-<<<<<<< HEAD
-			<UniqueIdentifier>{7A25F4AF-11C0-4F2C-B9AC-57DD7D68C947}</UniqueIdentifier>
+			<UniqueIdentifier>{F3832B6E-B25F-46D0-AA1F-24B2C5BAE871}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="Source\SpookyPhone\Resources\Windows">
-			<UniqueIdentifier>{6C9C5E7E-9D22-42E4-8A7A-BB8934778D0C}</UniqueIdentifier>
-=======
-			<UniqueIdentifier>{717EA665-96AD-4D22-83F0-118B9078E708}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="Source\SpookyPhone\Resources\Windows">
-			<UniqueIdentifier>{8C2C133F-D538-4A97-9323-D8958B2D3F81}</UniqueIdentifier>
->>>>>>> origin/jk-phone-interface
+			<UniqueIdentifier>{6D8956C1-8C01-479D-AA08-932C0DB2D4EB}</UniqueIdentifier>
 		</Filter>
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc">
 			<Filter>Source\SpookyPhone\Resources\Windows</Filter>

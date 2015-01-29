@@ -37,21 +37,17 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 	m_umgPhoneWidget = ObjectInitializer.CreateDefaultSubobject<UWidgetComponent>(this, TEXT("PhoneWidget"));
 	m_umgPhoneWidget->SetRelativeScale3D(FVector(0.3f, 0.3f, 1.f));
 	m_umgPhoneWidget->SetRelativeLocation(FVector(-15.f, -26.5f, 4.6f));
-	m_umgPhoneWidget->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
-
-	//m_umgPhoneWidget->Deactivate();
-
-	//m_umgPhoneWidget->widget
 
 	// Scene capture 2d
-	m_sceneCapture2D = ObjectInitializer.CreateDefaultSubobject<USceneCaptureComponent2D>(this, TEXT("PhoneCamera"));
-
+	m_phoneCamera = ObjectInitializer.CreateDefaultSubobject<UChildActorComponent>(this, TEXT("PhoneCamera"));
+	m_phoneCamera->ChildActorClass = APhoneCamera::StaticClass();
+	m_phoneCamera->SetRelativeRotation(FRotator(0.f, -90.f, -90.f));
 
 	// Root component of this actor is the phone's static mesh
 	RootComponent = m_phoneMesh;
 	m_screenMesh->AttachTo(RootComponent);
 	m_umgPhoneWidget->AttachTo(RootComponent);
-	m_sceneCapture2D->AttachTo(RootComponent);
+	m_phoneCamera->AttachTo(RootComponent);
 
 	m_numApps = 10;
 }
