@@ -33,7 +33,13 @@ private:
 	UMaterial* m_screenMaterial;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = UMG)
+	UWidgetComponent* m_umgPhoneWidget;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = UMG)
 	USpookyPhoneWidget* m_umgPhoneUI;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
+	USceneCaptureComponent2D* m_sceneCapture2D;
 
 	int32 m_numApps;
 };
