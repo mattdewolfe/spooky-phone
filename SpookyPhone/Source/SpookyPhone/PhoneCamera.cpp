@@ -86,7 +86,6 @@ bool APhoneCamera::TakePicture()
 
 	//set the frustum to take in what the phone camera sees. 
 
-	//return briefly to the NORMAL filter --> ?? or do we ant them to be able to save it as spooky/darkvision as well? 
 	//snap a screenshot, save it to a texture. 
 
 	//save that texture into our vector of pictures. 

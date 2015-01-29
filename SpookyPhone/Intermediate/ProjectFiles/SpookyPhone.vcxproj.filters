@@ -4,7 +4,11 @@
 	<ItemGroup>
 		<None Include="..\..\SpookyPhone.uproject" />
 		<Filter Include="Source">
+<<<<<<< HEAD
 			<UniqueIdentifier>{5ECC8AD8-872F-4C76-AE1B-37FB40230A59}</UniqueIdentifier>
+=======
+			<UniqueIdentifier>{0C226615-C4C1-4A94-A219-53ADC37C9E9F}</UniqueIdentifier>
+>>>>>>> origin/jk-phone-interface
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone.Target.cs">
 			<Filter>Source</Filter>
@@ -13,7 +17,11 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
+<<<<<<< HEAD
 			<UniqueIdentifier>{D4CB9997-6918-45EE-9014-A692CC9DD406}</UniqueIdentifier>
+=======
+			<UniqueIdentifier>{07E0F9E9-008E-4595-BB14-988478361C10}</UniqueIdentifier>
+>>>>>>> origin/jk-phone-interface
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -22,12 +30,27 @@
 			<Filter>Config</Filter>
 		</None >
 		<Filter Include="Source\SpookyPhone">
+<<<<<<< HEAD
 			<UniqueIdentifier>{44671654-7952-477E-B63F-F46EC093FB2B}</UniqueIdentifier>
 		</Filter>
 		<ClCompile Include="..\..\Source\SpookyPhone\PhoneCamera.cpp">
 			<Filter>Source\SpookyPhone</Filter>
 		</ClCompile >
 		<ClInclude Include="..\..\Source\SpookyPhone\PhoneCamera.h">
+=======
+			<UniqueIdentifier>{499D52C5-EBBB-4A53-8C1C-19FC0B7629E0}</UniqueIdentifier>
+		</Filter>
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyGameMode.cpp">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyGameMode.h">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPawn.cpp">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPawn.h">
+>>>>>>> origin/jk-phone-interface
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
 		<None Include="..\..\Source\SpookyPhone\SpookyPhone.Build.cs">
@@ -39,17 +62,36 @@
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhone.h">
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
-		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.cpp">
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhoneActor.cpp">
 			<Filter>Source\SpookyPhone</Filter>
 		</ClCompile >
-		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.h">
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneActor.h">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhoneWidget.cpp">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneWidget.h">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPlayerController.cpp">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPlayerController.h">
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
 		<Filter Include="Source\SpookyPhone\Resources">
+<<<<<<< HEAD
 			<UniqueIdentifier>{7A25F4AF-11C0-4F2C-B9AC-57DD7D68C947}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="Source\SpookyPhone\Resources\Windows">
 			<UniqueIdentifier>{6C9C5E7E-9D22-42E4-8A7A-BB8934778D0C}</UniqueIdentifier>
+=======
+			<UniqueIdentifier>{717EA665-96AD-4D22-83F0-118B9078E708}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\SpookyPhone\Resources\Windows">
+			<UniqueIdentifier>{8C2C133F-D538-4A97-9323-D8958B2D3F81}</UniqueIdentifier>
+>>>>>>> origin/jk-phone-interface
 		</Filter>
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc">
 			<Filter>Source\SpookyPhone\Resources\Windows</Filter>
