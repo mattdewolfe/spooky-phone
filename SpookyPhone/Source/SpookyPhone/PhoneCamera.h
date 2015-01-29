@@ -37,6 +37,7 @@ protected:
 	//
 public:
 	//constructor.
+	APhoneCamera(const FObjectInitializer &_obj);
 	//maybe takes in what it is going to be locked to and its render target. 
 	void BeginPlay() override;
 	//destructore. 

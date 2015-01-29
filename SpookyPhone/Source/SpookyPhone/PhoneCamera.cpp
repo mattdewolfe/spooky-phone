@@ -3,13 +3,21 @@
 
 #pragma region init/shutdown
 
+APhoneCamera::APhoneCamera(const FObjectInitializer &_obj)
+	{
+
+	}
+
 void APhoneCamera::BeginPlay()
 {
+	
+
 	//default to normal filter.
 	currentFilter = FilterType::NORMAL;
 
 	//load textures if any saved (stretch goal), if not then make a new vector. 
 	pictureGallery = std::vector<texturePTR>();
+
 
 	//call the super? 
 	Super::BeginPlay();
@@ -18,14 +26,16 @@ void APhoneCamera::BeginPlay()
 void APhoneCamera::BeginDestroy()
 {
 	//cleaning up texture vector as needed. 
-	while (!pictureGallery.back())
+	if (pictureGallery.size() > 0)
 	{
-		///release hold on texture. 
-		pictureGallery.back().reset();
-		//remove object from vector.
-		pictureGallery.pop_back();
+		while (!pictureGallery.back())
+		{
+			///release hold on texture. 
+			pictureGallery.back().reset();
+			//remove object from vector.
+			pictureGallery.pop_back();
+		}
 	}
-
 	//call the super? 
 	UnregisterAllComponents();
 	Super::BeginDestroy();
