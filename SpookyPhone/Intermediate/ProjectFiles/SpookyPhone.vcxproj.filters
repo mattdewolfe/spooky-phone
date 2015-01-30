@@ -4,7 +4,7 @@
 	<ItemGroup>
 		<None Include="..\..\SpookyPhone.uproject" />
 		<Filter Include="Source">
-			<UniqueIdentifier>{B1EAAD1E-596D-4C11-B286-A9607FF7DC30}</UniqueIdentifier>
+			<UniqueIdentifier>{FB7A5A34-7826-4FAD-9B78-5C18049CEFEC}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone.Target.cs">
 			<Filter>Source</Filter>
@@ -13,7 +13,7 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
-			<UniqueIdentifier>{0D14276A-E0CA-4654-8331-26B721361BE9}</UniqueIdentifier>
+			<UniqueIdentifier>{BB391B08-44D2-410D-AF90-F48C23E9B3C5}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -22,7 +22,7 @@
 			<Filter>Config</Filter>
 		</None >
 		<Filter Include="Source\SpookyPhone">
-			<UniqueIdentifier>{CF14A37C-782B-430B-9A96-1D771CB5AC61}</UniqueIdentifier>
+			<UniqueIdentifier>{24CDC8DE-6D39-4C3E-BFEB-E261CB31B718}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone\SpookyPhone.Build.cs">
 			<Filter>Source\SpookyPhone</Filter>
@@ -39,11 +39,17 @@
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.h">
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
+		<ClCompile Include="..\..\Source\SpookyPhone\SPPawn.cpp">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\SpookyPhone\SPPawn.h">
+			<Filter>Source\SpookyPhone</Filter>
+		</ClInclude >
 		<Filter Include="Source\SpookyPhone\Resources">
-			<UniqueIdentifier>{997BB5A7-C46D-43C3-81F7-4EC20E3BAA9B}</UniqueIdentifier>
+			<UniqueIdentifier>{E9E02376-1691-42BC-B316-CB6F7F198A2C}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="Source\SpookyPhone\Resources\Windows">
-			<UniqueIdentifier>{3E913D14-0876-406F-A7A1-C36215E8FAF6}</UniqueIdentifier>
+			<UniqueIdentifier>{20ADB4EE-0FFE-4746-A927-0DC7697E63DB}</UniqueIdentifier>
 		</Filter>
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc">
 			<Filter>Source\SpookyPhone\Resources\Windows</Filter>

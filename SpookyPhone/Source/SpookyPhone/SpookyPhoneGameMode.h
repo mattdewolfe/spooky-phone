@@ -12,8 +12,8 @@ UCLASS()
 class SPOOKYPHONE_API ASpookyPhoneGameMode : public AGameMode
 {
 	GENERATED_BODY()
-	
-	
+public:
+	ASpookyPhoneGameMode(const FObjectInitializer& _ObjectInitializer);
 	
 	
 };
