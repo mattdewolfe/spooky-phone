@@ -23,7 +23,7 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 	m_screenMesh = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Screen"));
 
 	// Load the material and static mesh of the screen
-	ConstructorHelpers::FObjectFinder<UStaticMesh> screenMesh(TEXT("StaticMesh'/Game/Shapes/Shape_Cube.Shape_Cube'"));
+	ConstructorHelpers::FObjectFinder<UStaticMesh> screenMesh(TEXT("StaticMesh'/Game/Meshes/Shape_Cube.Shape_Cube'"));
 	ConstructorHelpers::FObjectFinder<UMaterial> screenMaterial(TEXT("Material'/Game/Materials/White_Mat'"));
 
 	// Set the position and scale of the screen
@@ -34,11 +34,13 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 	m_screenMesh->SetRelativeScale3D(FVector(0.3f, 0.55f, 0.f));
 	m_screenMesh->SetRelativeLocation(FVector(0.f, 0.f, 4.59f));
 
+	// Create the widget component
 	m_umgPhoneWidget = ObjectInitializer.CreateDefaultSubobject<UWidgetComponent>(this, TEXT("PhoneWidget"));
 	m_umgPhoneWidget->SetRelativeScale3D(FVector(0.3f, 0.3f, 1.f));
 	m_umgPhoneWidget->SetRelativeLocation(FVector(-15.f, -26.5f, 4.6f));
+	m_umgPhoneWidget->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
 
-	// Scene capture 2d
+	// Attach Kayla's camera as a child actor for handling the camera
 	m_phoneCamera = ObjectInitializer.CreateDefaultSubobject<UChildActorComponent>(this, TEXT("PhoneCamera"));
 	m_phoneCamera->ChildActorClass = APhoneCamera::StaticClass();
 	m_phoneCamera->SetRelativeRotation(FRotator(0.f, -90.f, -90.f));
@@ -55,12 +57,30 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 void ASpookyPhoneActor::BeginPlay()
 {
 	Super::BeginPlay();
+}
 
-	m_umgPhoneWidget->SetComponentTickEnabled(false);
-	//m_umgPhoneWidget->Deactivate();
+void ASpookyPhoneActor::SetupPlayerInputComponent(UInputComponent* InputComponent)
+{
+	Super::SetupPlayerInputComponent(InputComponent);
 
+	InputComponent->BindAction("TogglePhone", IE_Pressed, this, &ASpookyPhoneActor::TogglePhone);
+}
+
+void ASpookyPhoneActor::TogglePhone()
+{
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("test, %d"), m_umgPhoneWidget->IsActive()));
+	}
+
+	if (m_umgPhoneWidget->IsActive())
+	{
+		m_umgPhoneWidget->Deactivate();
+		m_umgPhoneWidget->SetComponentTickEnabled(false);
+	}
+	else
+	{
+		m_umgPhoneWidget->Activate();
+		m_umgPhoneWidget->SetComponentTickEnabled(true);
 	}
 }

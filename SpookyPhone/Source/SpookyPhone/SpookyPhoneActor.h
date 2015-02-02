@@ -21,6 +21,11 @@ public:
 	virtual void BeginPlay() override;
 
 private:
+
+	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+
+	void TogglePhone();
+
 	UPROPERTY(VisibleDefaultsOnly, Category = StaticMesh)
 	UStaticMeshComponent* m_phoneMesh;
 

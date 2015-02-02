@@ -17,15 +17,18 @@ void APhoneCamera::BeginPlay()
 
 void APhoneCamera::BeginDestroy()
 {
-	//cleaning up texture vector as needed. 
-	while (!pictureGallery.back())
+	if (pictureGallery.size() > 0)
 	{
-		///release hold on texture. 
-		pictureGallery.back().reset();
-		//remove object from vector.
-		pictureGallery.pop_back();
+		//cleaning up texture vector as needed. 
+		while (!pictureGallery.back())
+		{
+			///release hold on texture. 
+			pictureGallery.back().reset();
+			//remove object from vector.
+			pictureGallery.pop_back();
+		}
 	}
-
+	
 	//call the super? 
 	UnregisterAllComponents();
 	Super::BeginDestroy();
