@@ -12,40 +12,40 @@
  * 
  */
 UCLASS()
-class SPOOKYPHONE_API ASpookyPhoneActor : public APawn
+class SPOOKYPHONE_API ASpookyPhoneActor : public AActor
 {
 	GENERATED_BODY()
 
 public:
 	ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer);
+
+	void TogglePhone();
+
+protected:
 	virtual void BeginPlay() override;
 
 private:
 
-	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
-
-	void TogglePhone();
-
 	UPROPERTY(VisibleDefaultsOnly, Category = StaticMesh)
-	UStaticMeshComponent* m_phoneMesh;
+	UStaticMeshComponent* PhoneMesh;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Material)
-	UMaterial* m_phoneMaterial;
+	UMaterial* PhoneMaterial;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = StaticMesh)
-	UStaticMeshComponent* m_screenMesh;
+	UStaticMeshComponent* ScreenMesh;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Material)
-	UMaterial* m_screenMaterial;
+	UMaterial* ScreenMaterial;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = UMG)
-	UWidgetComponent* m_umgPhoneWidget;
+	UWidgetComponent* UMGPhoneWidget;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = UMG)
-	USpookyPhoneWidget* m_umgPhoneUI;
+	USpookyPhoneWidget* UMGPhoneUI;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
-	UChildActorComponent* m_phoneCamera;
+	APhoneCamera* Camera;
 
-	int32 m_numApps;
+	int32 NumApps;
 };

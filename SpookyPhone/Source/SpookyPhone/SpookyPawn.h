@@ -3,6 +3,8 @@
 #pragma once
 
 #include "GameFramework/Pawn.h"
+#include "SpookyPhoneActor.h"
+
 #include "SpookyPawn.generated.h"
 
 /**
@@ -22,8 +24,16 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Movement)
 	UFloatingPawnMovement* MovementComponent;
 
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
+	UClass* PhoneClass;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
+	ASpookyPhoneActor* Phone;
+
 protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+	virtual void BeginPlay() override;
 
+	void OnUsePressed();
 	void OnForward(float value);
 };

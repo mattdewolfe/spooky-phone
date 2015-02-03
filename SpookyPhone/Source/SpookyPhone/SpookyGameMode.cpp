@@ -8,14 +8,14 @@
 ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	UClass* MyPawnClass = ASpookyPawn::StaticClass();
-	ConstructorHelpers::FObjectFinder<UBlueprint> PawnBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_SpookyPawn.BP_SpookyPawn'"));
-	if (PawnBlueprint.Object != NULL)
-	{
-		MyPawnClass = (UClass*)PawnBlueprint.Object->GeneratedClass;
-	}
+	//UClass* MyPawnClass = ASpookyPawn::StaticClass();
+	//ConstructorHelpers::FObjectFinder<UBlueprint> PawnBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_SpookyPawn.BP_SpookyPawn'"));
+	//if (PawnBlueprint.Object != NULL)
+	//{
+	//	MyPawnClass = (UClass*)PawnBlueprint.Object->GeneratedClass;
+	//}
 
-	DefaultPawnClass = MyPawnClass;
+	DefaultPawnClass = ASpookyPawn::StaticClass();
 	PlayerControllerClass = ASpookyPlayerController::StaticClass();
 }
 

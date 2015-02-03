@@ -12,13 +12,42 @@ ASpookyPawn::ASpookyPawn(const FObjectInitializer& ObjectInitializer)
 	RootComponent = ColliderComponent;
 
 	MovementComponent = ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));
+
+	PhoneClass = ASpookyPawn::StaticClass();
+	ConstructorHelpers::FObjectFinder<UBlueprint> PhoneBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_SpookyPhone.BP_SpookyPhone'"));
+	if (PhoneBlueprint.Object != NULL)
+	{
+		PhoneClass = (UClass*)PhoneBlueprint.Object->GeneratedClass;
+	}
+}
+
+void ASpookyPawn::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// get a reference to the world
+	UWorld* world = GetWorld();
+
+	if (world)
+	{
+		// spawn the phone near the pawn
+		Phone = GetWorld()->SpawnActor<ASpookyPhoneActor>(PhoneClass, FVector(50.f, 0.f, 50.f), FRotator(0.f, 90.f, 90.f));
+		Phone->AttachRootComponentToActor(this, NAME_None, EAttachLocation::KeepRelativeOffset);
+	}
 }
 
 void ASpookyPawn::SetupPlayerInputComponent(UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 
+	// bind some simple input
 	InputComponent->BindAxis("Forward", this, &ASpookyPawn::OnForward);
+	InputComponent->BindAction("TogglePhone", IE_Pressed, this, &ASpookyPawn::OnUsePressed);
+}
+
+void ASpookyPawn::OnUsePressed()
+{
+	Phone->TogglePhone();
 }
 
 void ASpookyPawn::OnForward(float value)
