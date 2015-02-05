@@ -3,21 +3,13 @@
 
 #pragma region init/shutdown
 
-APhoneCamera::APhoneCamera(const FObjectInitializer &_obj)
-	{
-
-	}
-
 void APhoneCamera::BeginPlay()
 {
-	
-
 	//default to normal filter.
-	currentFilter = FilterType::NORMAL;
+	currentFilter = FilterType::VE_NORMAL;
 
 	//load textures if any saved (stretch goal), if not then make a new vector. 
 	pictureGallery = std::vector<texturePTR>();
-
 
 	//call the super? 
 	Super::BeginPlay();
@@ -55,7 +47,7 @@ void APhoneCamera::SwitchFilter(FilterType _new)
 	//adjust camera options according to the currentFilter (tiny, staticyness, etc.)
 	switch (currentFilter)
 	{
-	case NORMAL:
+	case FilterType::VE_NORMAL:
 		temp.VignetteIntensity = 0.0f;
 		temp.VignetteColor = FLinearColor(0.0f, 0.0f, 0.0f);
 		temp.GrainIntensity = 0.0f;
@@ -63,7 +55,7 @@ void APhoneCamera::SwitchFilter(FilterType _new)
 		temp.FilmSaturation = 0.0;
 		temp.FilmContrast = 0.0f; 
 		break;
-	case NIGHTVISION:
+	case FilterType::VE_NIGHT:
 		temp.VignetteIntensity = 0.8f;
 		temp.VignetteColor = FLinearColor(0.0f, 0.0f, 0.0f);
 		temp.GrainIntensity = 0.8f;
@@ -71,7 +63,7 @@ void APhoneCamera::SwitchFilter(FilterType _new)
 		temp.FilmSaturation = 0.0;
 		temp.FilmContrast = 0.0f;
 		break;
-	case SPOOKY:
+	case FilterType::VE_SPOOKY:
 		temp.VignetteIntensity = 0.0f;
 		temp.VignetteColor = FLinearColor(0.0f, 0.0f, 0.0f);
 		temp.GrainIntensity = 2.0f;
@@ -92,23 +84,28 @@ void APhoneCamera::SwitchFilter(FilterType _new)
 
 bool APhoneCamera::TakePicture()
 {
-	//move this object to the location and orientation of the player. 
-
-	//set the frustum to take in what the phone camera sees. 
-
 	//snap a screenshot, save it to a texture. 
+	UTextureRenderTarget2D* tempRAW = new UTextureRenderTarget2D(FObjectInitializer());
+	tempRAW = this->GetCaptureComponent2D()->TextureTarget;
+	
+	//create a shared_ptr out of the raw pointer. 
+	texturePTR tempSHARED(&tempRAW);
+	//clean up the raw pointer. 
+	delete tempRAW;
 
 	//save that texture into our vector of pictures. 
-
+	pictureGallery.push_back(tempSHARED);
+	
 	//play a snapshot sound
+	GEngine->AddOnScreenDebugMessage(3, 5.0f, FColor::Red, "Click!");
 
-	//return render target to phone. 
 	return true;
 }
 
 texturePTR APhoneCamera::DisplayPicture(int _index)
 {
 	//display the picture at a given index on the phone. 
+	
 
 	//also display left/right arrows so the user can cycle through their pictures.
 
