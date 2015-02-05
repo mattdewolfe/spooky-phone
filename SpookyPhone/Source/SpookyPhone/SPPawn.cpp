@@ -20,17 +20,32 @@ void ASPPawn::Tick(float _DeltaTime)
 
 void ASPPawn::CalculateAndApplyMovement()
 {
-	float xMovement = 0;
-	float yMovement = 0;
 	// If the difference is less than precision, player is moving straight
 	GEngine->AddOnScreenDebugMessage(0, 1, FColor::Red, "movement added");
-	yMovement = leftWheelMotion + rightWheelMotion;
-	xMovement = rightWheelMotion - (leftWheelMotion / 2);
-	FRotator tempRot = GetControlRotation();
-	tempRot.Add(0, 0, xMovement);
-	FVector newDirection = GetControlRotation().Vector();
 
-	GetCharacterMovement()->AddInputVector(newDirection * leftWheelMotion + rightWheelMotion);
+	// Get Control rotation then pass values into input
+	AddControllerYawInput(leftWheelMotion/4);
+	AddControllerYawInput(rightWheelMotion/4);
+	
+	FVector newDirection = GetControlRotation().Vector();
+	bool bLeftWheelMovement = false;
+	bool bRightWheelMovement = false;
+	float tempScale = 0.0f;
+	if (leftWheelMotion != 0.0f)
+	{
+		tempScale += leftWheelMotion;
+		bLeftWheelMovement = true;
+	}
+	if (rightWheelMotion != 0.0f)
+	{
+		tempScale += rightWheelMotion;
+		bRightWheelMovement = true;
+	}
+	if (bLeftWheelMovement && bRightWheelMovement)
+	{
+		newDirection *= tempScale;
+		AddMovementInput(newDirection, tempScale);
+	}
 }
 
 void ASPPawn::SetupPlayerInputComponent(UInputComponent * _InputComponent)
