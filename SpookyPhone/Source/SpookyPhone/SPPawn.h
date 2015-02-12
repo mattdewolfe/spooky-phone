@@ -24,10 +24,11 @@ private:
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		UCapsuleComponent* ColliderComponent;
+	UCapsuleComponent* ColliderComponent;
 
 	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
 	virtual void Tick(float _DeltaTime);
+	virtual FRotator GetViewRotation() const override;
 
 	void CalculateAndApplyMovement();
 	void LeftWheelMovement(float _value);

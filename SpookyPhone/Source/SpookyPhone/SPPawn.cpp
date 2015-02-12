@@ -2,12 +2,14 @@
 
 #include "SpookyPhone.h"
 #include "SPPawn.h"
+#include "SPPlayerController.h"
 
 ASPPawn::ASPPawn(const FObjectInitializer& _ObjectInitializer)
 	: Super(_ObjectInitializer)
 {
 	ColliderComponent = _ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("ColliderComponent"));
 	ColliderComponent->SetCapsuleSize(5.0f, 5.0f);
+	RootComponent = ColliderComponent;
 
 	PrimaryActorTick.bCanEverTick = true;
 	wheelMotionPrecision = 0.2f;
@@ -44,7 +46,7 @@ void ASPPawn::CalculateAndApplyMovement()
 	if (bLeftWheelMovement && bRightWheelMovement)
 	{
 		newDirection *= tempScale;
-		AddMovementInput(newDirection, tempScale);
+		AddMovementInput(newDirection + newDirection, tempScale);
 	}
 }
 
@@ -62,6 +64,27 @@ void ASPPawn::LeftWheelMovement(float _value)
 void ASPPawn::RightWheelMovement(float _value)
 {
 	rightWheelMotion = _value;
+}
+
+FRotator ASPPawn::GetViewRotation() const
+{
+	if (ASPPlayerController* MYPC = Cast<ASPPlayerController>(Controller))
+	{
+		return MYPC->GetViewRotation();
+	}
+	else if (Role < ROLE_Authority)
+	{
+		// check if being spectated
+		for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
+		{
+			APlayerController* PlayerController = *Iterator;
+			if (PlayerController && PlayerController->PlayerCameraManager->GetViewTargetPawn() == this)
+			{
+				return PlayerController->BlendedTargetViewRotation;
+			}
+		}
+	}
+	return GetActorRotation();
 }
 
 

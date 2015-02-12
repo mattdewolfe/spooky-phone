@@ -49,6 +49,7 @@
 		<None Include="..\..\Source\SpookyPhoneEditor.Target.cs" />
 		<None Include="..\..\Config\DefaultEditor.ini" />
 		<None Include="..\..\Config\DefaultEngine.ini" />
+		<None Include="..\..\Config\DefaultInput.ini" />
 		<None Include="..\..\Source\SpookyPhone\SpookyPhone.Build.cs" />
 		<ClCompile Include="..\..\Source\SpookyPhone\SpookyPhone.cpp" />
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhone.h" />
@@ -56,6 +57,8 @@
 		<ClInclude Include="..\..\Source\SpookyPhone\SpookyPhoneGameMode.h" />
 		<ClCompile Include="..\..\Source\SpookyPhone\SPPawn.cpp" />
 		<ClInclude Include="..\..\Source\SpookyPhone\SPPawn.h" />
+		<ClCompile Include="..\..\Source\SpookyPhone\SPPlayerController.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\SPPlayerController.h" />
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc" />
 	</ItemGroup>
 	<PropertyGroup Label="Globals">
