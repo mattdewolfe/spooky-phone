@@ -87,17 +87,22 @@ bool APhoneCamera::TakePicture()
 	//snap a screenshot, save it to a texture. 
 	UTextureRenderTarget2D* tempRAW = new UTextureRenderTarget2D(FObjectInitializer());
 	tempRAW = this->GetCaptureComponent2D()->TextureTarget;
-	
-	//create a shared_ptr out of the raw pointer. 
-	texturePTR tempSHARED(&tempRAW);
-	//clean up the raw pointer. 
-	delete tempRAW;
 
-	//save that texture into our vector of pictures. 
-	pictureGallery.push_back(tempSHARED);
-	
+	//create a material with the texture data. 
+	std::string ts = "Material'/Game/Materials/kwParentGalleryMaterial.kwParentGalleryMaterial'";
+	std::wstring ws(ts.begin(), ts.end());
+	UMaterialInstance *tempMaterialInstance = LoadObject<UMaterialInstance>(NULL, ws.c_str()); // Returns NULL ?
+	UMaterialInstanceDynamic *dynamicMaterialInstance = UMaterialInstanceDynamic::Create(UMaterial::GetDefaultMaterial(MD_Surface), tempMaterialInstance);
+	dynamicMaterialInstance->SetTextureParameterValue("temptexture", tempRAW);
+
+	//push the material into our vector thereof. 
+	//pictureGallery.push_back(tempSHARED);
+
 	//play a snapshot sound
 	GEngine->AddOnScreenDebugMessage(3, 5.0f, FColor::Red, "Click!");
+
+	//clean up pointers. 
+	delete tempRAW;
 
 	return true;
 }
@@ -106,7 +111,6 @@ texturePTR APhoneCamera::DisplayPicture(int _index)
 {
 	//display the picture at a given index on the phone. 
 	
-
 	//also display left/right arrows so the user can cycle through their pictures.
 
 	//display delete button, allows deletion of current photograph.
@@ -127,6 +131,23 @@ bool APhoneCamera::DeletePicture(int _index)
 	//play a noise if needed.
 
 	return true;
+}
+
+//removes all items from the picture gallery vector. 
+bool APhoneCamera::DeleteAllPictures()
+{
+	//don't need to delete the pointers because they're shared.
+	//clearing the photo gallery ought to be sufficient.
+	pictureGallery.clear();
+
+	//if the gallery is empty, return true. 
+	if (pictureGallery.empty())
+	{
+		return true;
+	}
+	
+	//default return.
+	return false;
 }
 
 #pragma endregion

@@ -15,7 +15,9 @@
 #include "PhoneCamera.generated.h"
 
 //typedefing shared pointers to Textures for pictures.
+//change these to the material proper and delete the temporary texture as you go -> vector of materials instead. 
 typedef std::shared_ptr<UTextureRenderTarget2D*> texturePTR;
+typedef std::vector<texturePTR>::iterator textureIT;
 
 //filters. 
 // NORMAL - standard camera, no changes.
@@ -64,4 +66,5 @@ public:
 	texturePTR DisplayPicture(int _index);
 	//pops a given picture from the vector. 
 	bool DeletePicture(int _index);
+	bool DeleteAllPictures();
 };

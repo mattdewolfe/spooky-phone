@@ -4,7 +4,7 @@
 	<ItemGroup>
 		<None Include="..\..\SpookyPhone.uproject" />
 		<Filter Include="Source">
-			<UniqueIdentifier>{9490F77F-55DC-4D4C-9027-F1D1EBB89FEF}</UniqueIdentifier>
+			<UniqueIdentifier>{9727AD01-0454-4C7A-975F-4DCDF01B994B}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone.Target.cs">
 			<Filter>Source</Filter>
@@ -13,7 +13,7 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
-			<UniqueIdentifier>{44C17972-719A-45DD-B71A-F1F8B2995042}</UniqueIdentifier>
+			<UniqueIdentifier>{F84B406B-E869-4988-8BE8-FB4A070323C5}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -25,7 +25,7 @@
 			<Filter>Config</Filter>
 		</None >
 		<Filter Include="Source\SpookyPhone">
-			<UniqueIdentifier>{1F49377A-D649-41C1-89D8-CEA9DDA8538C}</UniqueIdentifier>
+			<UniqueIdentifier>{01935D97-0FDC-4F01-A3DF-8F1DF44275FD}</UniqueIdentifier>
 		</Filter>
 		<ClCompile Include="..\..\Source\SpookyPhone\PhoneCamera.cpp">
 			<Filter>Source\SpookyPhone</Filter>
@@ -73,10 +73,10 @@
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
 		<Filter Include="Source\SpookyPhone\Resources">
-			<UniqueIdentifier>{F373FE2E-8283-462F-AB9F-4A461FDBA593}</UniqueIdentifier>
+			<UniqueIdentifier>{7006F5A7-FCF9-4E21-BCBF-0D61D8BDB545}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="Source\SpookyPhone\Resources\Windows">
-			<UniqueIdentifier>{A4E90516-99DA-4783-8B2F-BA15900E2888}</UniqueIdentifier>
+			<UniqueIdentifier>{41969AC0-4713-4DC1-B808-03E9451C30EB}</UniqueIdentifier>
 		</Filter>
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc">
 			<Filter>Source\SpookyPhone\Resources\Windows</Filter>
