@@ -45,7 +45,7 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 	ScreenMesh->AttachTo(RootComponent);
 	UMGPhoneWidget->AttachTo(RootComponent);
 
-	NumApps = 10;
+	bIsHidden = true;
 }
 
 void ASpookyPhoneActor::BeginPlay()
@@ -67,6 +67,13 @@ void ASpookyPhoneActor::BeginPlay()
 
 void ASpookyPhoneActor::TogglePhone()
 {
+	SetActorTickEnabled(bIsHidden);
+	SetActorHiddenInGame(bIsHidden);
+	bIsHidden = !bIsHidden;
+}
+
+void ASpookyPhoneActor::TogglePhoneUI()
+{
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("test, %d"), UMGPhoneWidget->IsActive()));
@@ -77,11 +84,13 @@ void ASpookyPhoneActor::TogglePhone()
 		UMGPhoneWidget->Deactivate();
 		UMGPhoneWidget->SetHiddenInGame(true);
 		UMGPhoneWidget->SetComponentTickEnabled(false);
+		UMGPhoneWidget->SetVisibility(ESlateVisibility::Visible);
 	}
 	else
 	{
 		UMGPhoneWidget->Activate();
 		UMGPhoneWidget->SetHiddenInGame(false);
 		UMGPhoneWidget->SetComponentTickEnabled(true);
+		UMGPhoneWidget->SetVisibility(ESlateVisibility::Hidden);
 	}
 }

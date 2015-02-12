@@ -14,7 +14,18 @@ class SPOOKYPHONE_API USpookyPhoneWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
+	// handle keyboard input on the widget
+	virtual FEventReply OnKeyDown_Implementation(FGeometry MyGeometry, FKeyboardEvent InKeyboardEvent) override;
+
+	void Construct_Implementation() override;
+
 private:
+	// select the next app in the widget
+	UFUNCTION()
+	void SelectNextApp();
+
+	UPROPERTY()
+	bool m_bLockControls;
 
 	UPROPERTY(VisibleDefaultsOnly)
 	int32 m_apps;

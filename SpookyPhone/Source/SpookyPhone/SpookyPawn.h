@@ -34,6 +34,7 @@ protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	virtual void BeginPlay() override;
 
-	void OnUsePressed();
+	void OnEPressed();
+	void OnDPressed();
 	void OnForward(float value);
 };

@@ -42,12 +42,18 @@ void ASpookyPawn::SetupPlayerInputComponent(UInputComponent* InputComponent)
 
 	// bind some simple input
 	InputComponent->BindAxis("Forward", this, &ASpookyPawn::OnForward);
-	InputComponent->BindAction("TogglePhone", IE_Pressed, this, &ASpookyPawn::OnUsePressed);
+	InputComponent->BindAction("E", IE_Pressed, this, &ASpookyPawn::OnEPressed);
+	InputComponent->BindAction("D", IE_Pressed, this, &ASpookyPawn::OnDPressed);
 }
 
-void ASpookyPawn::OnUsePressed()
+void ASpookyPawn::OnEPressed()
 {
 	Phone->TogglePhone();
+}
+
+void ASpookyPawn::OnDPressed()
+{
+	Phone->TogglePhoneUI();
 }
 
 void ASpookyPawn::OnForward(float value)

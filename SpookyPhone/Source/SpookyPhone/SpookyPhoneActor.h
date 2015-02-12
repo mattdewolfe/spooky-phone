@@ -20,6 +20,7 @@ public:
 	ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer);
 
 	void TogglePhone();
+	void TogglePhoneUI();
 
 protected:
 	virtual void BeginPlay() override;
@@ -47,5 +48,6 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
 	APhoneCamera* Camera;
 
-	int32 NumApps;
+	UPROPERTY()
+	bool bIsHidden;
 };
