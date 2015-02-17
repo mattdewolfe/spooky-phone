@@ -9,6 +9,7 @@
 //standard includes
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 //Engine includes.
 #include "Engine/SceneCapture2D.h"
@@ -16,7 +17,7 @@
 
 //typedefing shared pointers to Textures for pictures.
 //change these to the material proper and delete the temporary texture as you go -> vector of materials instead. 
-typedef std::shared_ptr<UMaterialInstanceDynamic> materialPTR;
+typedef UMaterialInstanceDynamic* materialPTR;
 typedef std::vector<materialPTR>::iterator materialIT;
 
 //filters. 
@@ -63,8 +64,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TEST)
 	bool TakePicture();
 	//displays the picture on the phone.
-	materialPTR DisplayPicture(int _index);
-	//pops a given picture from the vector. 
-	bool DeletePicture(int _index);
+	UFUNCTION(BlueprintCallable, Category = TEST)
+	UMaterialInstanceDynamic* DisplayPicture(int32 _index);
+	//pops a given picture from the vector.
+	UFUNCTION(BlueprintCallable, Category = TEST)
+	bool DeletePicture(int32 _index);
+	UFUNCTION(BlueprintCallable, Category = TEST)
 	bool DeleteAllPictures();
 };

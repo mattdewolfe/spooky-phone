@@ -23,7 +23,7 @@ void APhoneCamera::BeginDestroy()
 		while (!pictureGallery.back())
 		{
 			///release hold on texture. 
-			pictureGallery.back().reset();
+			delete pictureGallery.back();
 			//remove object from vector.
 			pictureGallery.pop_back();
 		}
@@ -95,42 +95,37 @@ bool APhoneCamera::TakePicture()
 	UMaterialInstanceDynamic *dynamicMaterialInstance = UMaterialInstanceDynamic::Create(UMaterial::GetDefaultMaterial(MD_Surface), tempMaterialInstance);
 	dynamicMaterialInstance->SetTextureParameterValue("temptexture", tempRAW);
 
-	std::shared_ptr<UMaterialInstanceDynamic> dynamicMaterialInstanceSHARED(dynamicMaterialInstance);
-
 	//push the material into our vector thereof. 
-	pictureGallery.push_back(dynamicMaterialInstanceSHARED);
+	pictureGallery.push_back(dynamicMaterialInstance);
 	
-	//play a snapshot sound
-	GEngine->AddOnScreenDebugMessage(3, 5.0f, FColor::Red, "Click!");
-
 	//clean up pointers. 
 	delete tempRAW;
 
 	return true;
 }
 
-materialPTR APhoneCamera::DisplayPicture(int _index)
+UMaterialInstanceDynamic* APhoneCamera::DisplayPicture(int32 _index)
 {
+	//make sure it is a viable index. 
+	if (pictureGallery.size() > _index)
+	{
+		return NULL;
+	}
+
 	//display the picture at a given index on the phone. 
-	
-	//also display left/right arrows so the user can cycle through their pictures.
-
-	//display delete button, allows deletion of current photograph.
-
-	//play a swipe noise if swiped to left/right.
-
-	return NULL;
+	return pictureGallery[_index];
 }
 
-bool APhoneCamera::DeletePicture(int _index)
+bool APhoneCamera::DeletePicture(int32 _index)
 {
 	//play a noise and return false if there is no picture to delete.
+	if (pictureGallery.size() == 0 || pictureGallery.size() > _index)
+	{
+		return false;
+	}
 
 	//removes a picture from the vector. 
-	
-	//displays next photograph in gallery if possible; if none exists, go to the previous one.
-
-	//play a noise if needed.
+	pictureGallery.erase(pictureGallery.begin() + _index);
 
 	return true;
 }
@@ -140,7 +135,16 @@ bool APhoneCamera::DeleteAllPictures()
 {
 	//don't need to delete the pointers because they're shared.
 	//clearing the photo gallery ought to be sufficient.
-	pictureGallery.clear();
+	if (pictureGallery.size() > 0)
+	{
+		while (!pictureGallery.back())
+		{
+			///release hold on texture. 
+			delete pictureGallery.back();
+			//remove object from vector.
+			pictureGallery.pop_back();
+		}
+	}
 
 	//if the gallery is empty, return true. 
 	if (pictureGallery.empty())
