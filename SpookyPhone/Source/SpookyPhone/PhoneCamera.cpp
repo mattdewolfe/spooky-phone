@@ -9,7 +9,7 @@ void APhoneCamera::BeginPlay()
 	currentFilter = FilterType::VE_NORMAL;
 
 	//load textures if any saved (stretch goal), if not then make a new vector. 
-	pictureGallery = std::vector<texturePTR>();
+	pictureGallery = std::vector<materialPTR>();
 
 	//call the super? 
 	Super::BeginPlay();
@@ -95,9 +95,11 @@ bool APhoneCamera::TakePicture()
 	UMaterialInstanceDynamic *dynamicMaterialInstance = UMaterialInstanceDynamic::Create(UMaterial::GetDefaultMaterial(MD_Surface), tempMaterialInstance);
 	dynamicMaterialInstance->SetTextureParameterValue("temptexture", tempRAW);
 
-	//push the material into our vector thereof. 
-	//pictureGallery.push_back(tempSHARED);
+	std::shared_ptr<UMaterialInstanceDynamic> dynamicMaterialInstanceSHARED(dynamicMaterialInstance);
 
+	//push the material into our vector thereof. 
+	pictureGallery.push_back(dynamicMaterialInstanceSHARED);
+	
 	//play a snapshot sound
 	GEngine->AddOnScreenDebugMessage(3, 5.0f, FColor::Red, "Click!");
 
@@ -107,7 +109,7 @@ bool APhoneCamera::TakePicture()
 	return true;
 }
 
-texturePTR APhoneCamera::DisplayPicture(int _index)
+materialPTR APhoneCamera::DisplayPicture(int _index)
 {
 	//display the picture at a given index on the phone. 
 	

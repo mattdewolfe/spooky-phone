@@ -16,8 +16,8 @@
 
 //typedefing shared pointers to Textures for pictures.
 //change these to the material proper and delete the temporary texture as you go -> vector of materials instead. 
-typedef std::shared_ptr<UTextureRenderTarget2D*> texturePTR;
-typedef std::vector<texturePTR>::iterator textureIT;
+typedef std::shared_ptr<UMaterialInstanceDynamic> materialPTR;
+typedef std::vector<materialPTR>::iterator materialIT;
 
 //filters. 
 // NORMAL - standard camera, no changes.
@@ -40,7 +40,7 @@ class SPOOKYPHONE_API APhoneCamera : public ASceneCapture2D
 
 private:
 	//holds the textures of the taken photographs so they can be redisplayed on the phone. 
-	std::vector<texturePTR> pictureGallery;
+	std::vector<materialPTR> pictureGallery;
 protected:
 	//
 public:
@@ -63,7 +63,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TEST)
 	bool TakePicture();
 	//displays the picture on the phone.
-	texturePTR DisplayPicture(int _index);
+	materialPTR DisplayPicture(int _index);
 	//pops a given picture from the vector. 
 	bool DeletePicture(int _index);
 	bool DeleteAllPictures();
