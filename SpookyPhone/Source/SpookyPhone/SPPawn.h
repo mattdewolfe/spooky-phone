@@ -23,7 +23,10 @@ private:
 	float wheelMotionPrecision;
 
 public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	UMovementComponent* MovementComponent;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
 	UCapsuleComponent* ColliderComponent;
 
 	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;

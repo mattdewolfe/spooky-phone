@@ -28,15 +28,18 @@ void ASPPlayerController::UpdateRotation(float DeltaTime)
 			// Disable bUpdateOnRT if using this method.
 			GEngine->HMDDevice->GetCurrentOrientationAndPosition(HMDOrientation, HMDPosition);
 
+			// Grab rotaiton of HDM
 			FRotator NewViewRotation = HMDOrientation.Rotator();
 
 			// Only keep the yaw component from the controller.
 			NewViewRotation.Yaw += NewControlRotation.Yaw;
 
+			// Set our new view rotation
 			SetViewRotation(NewViewRotation);
 		}
 	}
 
+	// Lastly update facing rotation of pawn
 	APawn* const P = GetPawnOrSpectator();
 	if (P)
 	{
@@ -58,11 +61,14 @@ void ASPPlayerController::SetControlRotation(const FRotator& NewRotation)
 	}
 }
 
+// We may need to change this function, such that view rotation is updated
+// relative to the facing direction of the pawn (not the camera)
 void ASPPlayerController::SetViewRotation(const FRotator& NewRotation)
 {
 	ViewRotation = NewRotation;
 }
 
+// Use this to get our view rotation only
 FRotator ASPPlayerController::GetViewRotation() const
 {
 	return ViewRotation;

@@ -11,24 +11,22 @@ ASPPawn::ASPPawn(const FObjectInitializer& _ObjectInitializer)
 	ColliderComponent->SetCapsuleSize(5.0f, 5.0f);
 	RootComponent = ColliderComponent;
 
+	MovementComponent = _ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));
+
 	PrimaryActorTick.bCanEverTick = true;
 	wheelMotionPrecision = 0.2f;
 }
 
 void ASPPawn::Tick(float _DeltaTime)
 {
-	CalculateAndApplyMovement();
+	//CalculateAndApplyMovement();
 }
 
+// First attempt at tank controls for wheelchair.
+// This is garbage at the moment, and does not factor in new
+// Rift view rotation code
 void ASPPawn::CalculateAndApplyMovement()
 {
-	// If the difference is less than precision, player is moving straight
-	GEngine->AddOnScreenDebugMessage(0, 1, FColor::Red, "movement added");
-
-	// Get Control rotation then pass values into input
-	AddControllerYawInput(leftWheelMotion/4);
-	AddControllerYawInput(rightWheelMotion/4);
-	
 	FVector newDirection = GetControlRotation().Vector();
 	bool bLeftWheelMovement = false;
 	bool bRightWheelMovement = false;
@@ -45,49 +43,39 @@ void ASPPawn::CalculateAndApplyMovement()
 	}
 	if (bLeftWheelMovement && bRightWheelMovement)
 	{
-		newDirection *= tempScale;
-		AddMovementInput(newDirection + newDirection, tempScale);
+		//	newDirection *= tempScale;
+		AddMovementInput(newDirection, tempScale);
 	}
+	// Consider rotation movement and clamp to 1.0f
+	if (bRightWheelMovement || bLeftWheelMovement)
+	{
+		AddControllerYawInput((leftWheelMotion + rightWheelMotion)*0.1);
+	}
+
 }
 
 void ASPPawn::SetupPlayerInputComponent(UInputComponent * _InputComponent)
 {
-	_InputComponent->BindAxis("LeftWheel", this, &ASPPawn::LeftWheelMovement);
-	_InputComponent->BindAxis("RightWheel", this, &ASPPawn::RightWheelMovement);
+	_InputComponent->BindAxis("MoveForward", this, &ASPPawn::LeftWheelMovement);
+	_InputComponent->BindAxis("Turn", this, &ASPPawn::RightWheelMovement);
 }
 
 void ASPPawn::LeftWheelMovement(float _value)
 {
-	leftWheelMotion = _value;
+	AddMovementInput(GetControlRotation().Vector(), _value);
 }
 
 void ASPPawn::RightWheelMovement(float _value)
 {
-	rightWheelMotion = _value;
+	AddControllerYawInput(_value);
 }
 
+// Get our view rotation (from controller)
 FRotator ASPPawn::GetViewRotation() const
 {
 	if (ASPPlayerController* MYPC = Cast<ASPPlayerController>(Controller))
 	{
 		return MYPC->GetViewRotation();
 	}
-	else if (Role < ROLE_Authority)
-	{
-		// check if being spectated
-		for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
-		{
-			APlayerController* PlayerController = *Iterator;
-			if (PlayerController && PlayerController->PlayerCameraManager->GetViewTargetPawn() == this)
-			{
-				return PlayerController->BlendedTargetViewRotation;
-			}
-		}
-	}
 	return GetActorRotation();
 }
-
-
-
-
-
