@@ -5,13 +5,13 @@
 
 FEventReply USpookyPhoneWidget::OnKeyDown_Implementation(FGeometry MyGeometry, FKeyboardEvent InKeyboardEvent)
 {
-	if (m_bLockControls)
+	if (bLockControls)
 	{
 		FEventReply Reply;
 		Reply.NativeReply = FReply::Handled();
 		return Reply;
 	}
-	else if (InKeyboardEvent.GetKey() == EKeys::F)
+	else if (InKeyboardEvent.GetKey() == EKeys::Right)
 	{
 		SelectNextApp();
 
@@ -28,9 +28,11 @@ FEventReply USpookyPhoneWidget::OnKeyDown_Implementation(FGeometry MyGeometry, F
 void USpookyPhoneWidget::Construct_Implementation()
 {
 	Super::Construct_Implementation();
+}
 
-	UButton* appButton = (UButton*)GetWidgetFromName(TEXT("W_Phone_App_C_1"));
-	appButton->OnClicked.AddDynamic(this, &USpookyPhoneWidget::SelectNextApp);
+void AddButton()
+{
+	
 }
 
 void USpookyPhoneWidget::SelectNextApp()

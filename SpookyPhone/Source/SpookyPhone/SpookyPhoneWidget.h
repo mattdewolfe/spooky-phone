@@ -19,14 +19,16 @@ class SPOOKYPHONE_API USpookyPhoneWidget : public UUserWidget
 
 	void Construct_Implementation() override;
 
+	void AddButton();
+	
 private:
 	// select the next app in the widget
 	UFUNCTION()
 	void SelectNextApp();
 
 	UPROPERTY()
-	bool m_bLockControls;
+	bool bLockControls;
 
 	UPROPERTY(VisibleDefaultsOnly)
-	int32 m_apps;
+	int32 Apps;
 };
