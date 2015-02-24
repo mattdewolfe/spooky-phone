@@ -1,9 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SpookyPhone.h"
+<<<<<<< HEAD:SpookyPhone/Source/SpookyPhone/SpookyPhoneGameMode.cpp
 #include "SpookyPhoneGameMode.h"
 #include "SPPawn.h"
 #include "SPPlayerController.h"
+=======
+#include "SpookyPlayerController.h"
+>>>>>>> jk-phone-interface:SpookyPhone/Source/SpookyPhone/SpookyPlayerController.cpp
 
 ASpookyPhoneGameMode::ASpookyPhoneGameMode(const FObjectInitializer& _ObjectInitializer)
 	: Super(_ObjectInitializer)
