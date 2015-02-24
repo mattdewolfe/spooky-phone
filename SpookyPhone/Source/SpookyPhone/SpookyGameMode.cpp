@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SpookyPhone.h"
-#include "SpookyGameMode.h"
 #include "SpookyPlayerController.h"
 #include "SpookyPawn.h"
+#include "SpookyGameMode.h"
 
-ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
+ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& _ObjectInitializer)
+	: Super(_ObjectInitializer)
 {
 	//UClass* MyPawnClass = ASpookyPawn::StaticClass();
 	//ConstructorHelpers::FObjectFinder<UBlueprint> PawnBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_SpookyPawn.BP_SpookyPawn'"));
@@ -17,14 +17,4 @@ ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& ObjectInitializer)
 
 	DefaultPawnClass = ASpookyPawn::StaticClass();
 	PlayerControllerClass = ASpookyPlayerController::StaticClass();
-}
-
-void ASpookyGameMode::StartPlay()
-{
-	Super::StartPlay();
-
-	if (GEngine)
-	{
-		
-	}
 }

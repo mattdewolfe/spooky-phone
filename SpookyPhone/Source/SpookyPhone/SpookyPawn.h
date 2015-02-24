@@ -4,7 +4,6 @@
 
 #include "GameFramework/Pawn.h"
 #include "SpookyPhoneActor.h"
-
 #include "SpookyPawn.generated.h"
 
 /**
@@ -18,23 +17,38 @@ class SPOOKYPHONE_API ASpookyPawn : public APawn
 public:
 	ASpookyPawn(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Collision)
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	UMovementComponent* MovementComponent;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
 	UCapsuleComponent* ColliderComponent;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Movement)
-	UFloatingPawnMovement* MovementComponent;
+	// Get rotation function override for implementation of seperating
+	// VR look rotation from the pawn rotation
+	virtual FRotator GetViewRotation() const override;
+
+	void CalculateAndApplyMovement();
+	void LeftWheelMoved(float _value);
+	void RightWheelMoved(float _value);
+	void MoveForward(float _value);
+	void Turn(float _value);
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	UClass* PhoneClass;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	ASpookyPhoneActor* Phone;
+	
+//	void TogglePhone();
 
-protected:
-	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	virtual void BeginPlay() override;
+	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
+	virtual void Tick(float _DeltaTime);
 
-	void OnEPressed();
-	void OnDPressed();
-	void OnForward(float value);
+private:
+	// Stores value from each axis 
+	float leftWheelMotion;
+	float rightWheelMotion;
+	// Use to determine how much of a difference in axis value we will ignore
+	float wheelMotionPrecision;
 };

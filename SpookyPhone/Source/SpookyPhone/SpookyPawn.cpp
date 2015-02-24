@@ -2,16 +2,17 @@
 
 #include "SpookyPhone.h"
 #include "SpookyPawn.h"
+#include "SpookyPhone.h"
+#include "SpookyPlayerController.h"
 
-ASpookyPawn::ASpookyPawn(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
+ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
+	: Super(_ObjectInitializer)
 {
-	ColliderComponent = ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("ColliderComponent"));
-	ColliderComponent->SetCapsuleSize(5.f, 5.f);
-	ColliderComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	ColliderComponent = _ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("ColliderComponent"));
+	ColliderComponent->SetCapsuleSize(5.0f, 5.0f);
 	RootComponent = ColliderComponent;
 
-	MovementComponent = ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));
+	MovementComponent = _ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));
 
 	PhoneClass = ASpookyPawn::StaticClass();
 	ConstructorHelpers::FObjectFinder<UBlueprint> PhoneBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_SpookyPhone.BP_SpookyPhone'"));
@@ -19,6 +20,9 @@ ASpookyPawn::ASpookyPawn(const FObjectInitializer& ObjectInitializer)
 	{
 		PhoneClass = (UClass*)PhoneBlueprint.Object->GeneratedClass;
 	}
+
+	PrimaryActorTick.bCanEverTick = true;
+	wheelMotionPrecision = 0.2f;
 }
 
 void ASpookyPawn::BeginPlay()
@@ -36,27 +40,76 @@ void ASpookyPawn::BeginPlay()
 	}
 }
 
-void ASpookyPawn::SetupPlayerInputComponent(UInputComponent* InputComponent)
+void ASpookyPawn::Tick(float _DeltaTime)
 {
-	Super::SetupPlayerInputComponent(InputComponent);
-
-	// bind some simple input
-	InputComponent->BindAxis("Forward", this, &ASpookyPawn::OnForward);
-	InputComponent->BindAction("E", IE_Pressed, this, &ASpookyPawn::OnEPressed);
-	InputComponent->BindAction("D", IE_Pressed, this, &ASpookyPawn::OnDPressed);
+	CalculateAndApplyMovement();
 }
 
-void ASpookyPawn::OnEPressed()
+// First attempt at tank controls for wheelchair.
+// This is garbage at the moment, and does not factor in new
+// Rift view rotation code
+void ASpookyPawn::CalculateAndApplyMovement()
 {
-	Phone->TogglePhone();
+	// For the time being, we are multiplaying input values by magical floats in 
+	// order to slow down the speed of rotation and movement
+
+	// If left wheel is not moving, and right is
+	if (abs(leftWheelMotion) <= 0.1f && rightWheelMotion != 0.0f)
+	{
+		// Add rights negative yaw motion
+		AddControllerYawInput(rightWheelMotion*0.25);
+	}
+	// If left wheel is moving and right is not
+	else if (leftWheelMotion != 0.0f && abs(rightWheelMotion) <= 0.1f)
+	{
+		// Add lefts yaw motion
+		AddControllerYawInput(leftWheelMotion*0.25);
+	}
+	// If both are non zero, combine for yaw and movement
+	else if (abs(rightWheelMotion) >= 0.1f && abs(leftWheelMotion) >= 0.1f)
+	{
+		AddControllerYawInput((leftWheelMotion + rightWheelMotion)*0.2);
+		AddMovementInput(GetControlRotation().Vector(), (leftWheelMotion - rightWheelMotion)*0.5);
+	}
 }
 
-void ASpookyPawn::OnDPressed()
+void ASpookyPawn::SetupPlayerInputComponent(UInputComponent * _InputComponent)
 {
-	Phone->TogglePhoneUI();
+	// Normal fps setup
+	//	_InputComponent->BindAxis("MoveForward", this, &ASpookyPawn::MoveForward);
+	//	_InputComponent->BindAxis("Turn", this, &ASpookyPawn::Turn);
+	_InputComponent->BindAxis("LeftWheel", this, &ASpookyPawn::LeftWheelMoved);
+	_InputComponent->BindAxis("RightWheel", this, &ASpookyPawn::RightWheelMoved);
 }
 
-void ASpookyPawn::OnForward(float value)
+void ASpookyPawn::LeftWheelMoved(float _value)
 {
-	MovementComponent->AddInputVector(GetActorForwardVector() * value);
+	leftWheelMotion = _value;
 }
+
+void ASpookyPawn::RightWheelMoved(float _value)
+{
+	rightWheelMotion = _value;
+}
+
+void ASpookyPawn::MoveForward(float _value)
+{
+	AddMovementInput(GetControlRotation().Vector(), _value);
+}
+
+void ASpookyPawn::Turn(float _value)
+{
+	AddControllerYawInput(_value);
+}
+
+// Get our view rotation (from controller)
+FRotator ASpookyPawn::GetViewRotation() const
+{
+	if (ASpookyPlayerController* MYPC = Cast<ASpookyPlayerController>(Controller))
+	{
+		return MYPC->GetViewRotation();
+	}
+	return GetActorRotation();
+}
+
+

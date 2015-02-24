@@ -1,32 +1,79 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SpookyPhone.h"
-<<<<<<< HEAD:SpookyPhone/Source/SpookyPhone/SpookyPhoneGameMode.cpp
-#include "SpookyPhoneGameMode.h"
-#include "SPPawn.h"
-#include "SPPlayerController.h"
-=======
 #include "SpookyPlayerController.h"
->>>>>>> jk-phone-interface:SpookyPhone/Source/SpookyPhone/SpookyPlayerController.cpp
+#include "IHeadMountedDisplay.h"
 
-ASpookyPhoneGameMode::ASpookyPhoneGameMode(const FObjectInitializer& _ObjectInitializer)
-	: Super(_ObjectInitializer)
+void ASpookyPlayerController::UpdateRotation(float DeltaTime)
 {
-	// Setup a base class
-	UClass* MyPawnClass = ASPPawn::StaticClass();
+	// Calculate Delta to be applied on ViewRotation
+	FRotator DeltaRot(RotationInput);
 
-/*	We can use this to spawn our pawn based on a blueprint	
-// Find a blueprint we have already defined
-	ConstructorHelpers::FObjectFinder<UBlueprint> PawnBlueprint(
-	TEXT("Blueprint'/Game/TheChair.TheChair'"));
-	// Ensure that the blueprint we want exists, if it does not we use a general pawn
-	if (PawnBlueprint.Object != NULL)
+	FRotator NewControlRotation = GetControlRotation();
+
+	if (PlayerCameraManager)
 	{
-		MyPawnClass = (UClass*)PawnBlueprint.Object->GeneratedClass;
-	}*/
+		PlayerCameraManager->ProcessViewRotation(DeltaTime, NewControlRotation, DeltaRot);
+	}
 
-	// Then set our pawn to class we made
-	DefaultPawnClass = MyPawnClass;
-	// Setup controller
-	PlayerControllerClass = ASPPlayerController::StaticClass();
+	SetControlRotation(NewControlRotation);
+
+	if (!PlayerCameraManager || !PlayerCameraManager->bFollowHmdOrientation)
+	{
+		if (GEngine->HMDDevice.IsValid() && GEngine->HMDDevice->IsHeadTrackingAllowed())
+		{
+			FQuat HMDOrientation;
+			FVector HMDPosition;
+
+			// Disable bUpdateOnRT if using this method.
+			GEngine->HMDDevice->GetCurrentOrientationAndPosition(HMDOrientation, HMDPosition);
+
+			// Grab rotaiton of HDM
+			FRotator NewViewRotation = HMDOrientation.Rotator();
+
+			// Only keep the yaw component from the controller.
+			NewViewRotation.Yaw += NewControlRotation.Yaw;
+
+			// Set our new view rotation
+			SetViewRotation(NewViewRotation);
+		}
+	}
+
+	// Lastly update facing rotation of pawn
+	APawn* const P = GetPawnOrSpectator();
+	if (P)
+	{
+		P->FaceRotation(NewControlRotation, DeltaTime);
+	}
 }
+
+void ASpookyPlayerController::SetControlRotation(const FRotator& NewRotation)
+{
+	ControlRotation = NewRotation;
+
+	// Anything that is overriding view rotation will need to 
+	// call SetViewRotation() after SetControlRotation().
+	SetViewRotation(NewRotation);
+
+	if (RootComponent && RootComponent->bAbsoluteRotation)
+	{
+		RootComponent->SetWorldRotation(GetControlRotation());
+	}
+}
+
+// We may need to change this function, such that view rotation is updated
+// relative to the facing direction of the pawn (not the camera)
+void ASpookyPlayerController::SetViewRotation(const FRotator& NewRotation)
+{
+	ViewRotation = NewRotation;
+}
+
+// Use this to get our view rotation only
+FRotator ASpookyPlayerController::GetViewRotation() const
+{
+	return ViewRotation;
+}
+
+
+
+

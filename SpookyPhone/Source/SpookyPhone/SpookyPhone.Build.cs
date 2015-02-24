@@ -6,7 +6,7 @@ public class SpookyPhone : ModuleRules
 {
 	public SpookyPhone(TargetInfo Target)
 	{
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "Slate", "SlateCore" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "Slate", "SlateCore", "HeadMountedDisplay" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
