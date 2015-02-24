@@ -31,10 +31,15 @@ public:
 
 	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
 	virtual void Tick(float _DeltaTime);
+
+	// Get rotation function override for implementation of seperating
+	// VR look rotation from the pawn rotation
 	virtual FRotator GetViewRotation() const override;
 
 	void CalculateAndApplyMovement();
-	void LeftWheelMovement(float _value);
-	void RightWheelMovement(float _value);
+	void LeftWheelMoved(float _value);
+	void RightWheelMoved(float _value);
+	void MoveForward(float _value);
+	void Turn(float _value);
 
 };

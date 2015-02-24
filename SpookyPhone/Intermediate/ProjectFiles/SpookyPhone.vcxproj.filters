@@ -4,7 +4,7 @@
 	<ItemGroup>
 		<None Include="..\..\SpookyPhone.uproject" />
 		<Filter Include="Source">
-			<UniqueIdentifier>{E1E99B7B-F9BE-482C-9E99-9BA4D773C1FE}</UniqueIdentifier>
+			<UniqueIdentifier>{2C316A73-0AF7-4D27-8B02-950AE1BD7BA8}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone.Target.cs">
 			<Filter>Source</Filter>
@@ -13,7 +13,7 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
-			<UniqueIdentifier>{E3158292-7EAF-4115-800D-467003C1BEC8}</UniqueIdentifier>
+			<UniqueIdentifier>{FFCEEF25-85EE-4CA6-826A-10BB0D8DA91C}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -25,7 +25,7 @@
 			<Filter>Config</Filter>
 		</None >
 		<Filter Include="Source\SpookyPhone">
-			<UniqueIdentifier>{C5176191-7A7C-426C-8ECD-2F3124663E43}</UniqueIdentifier>
+			<UniqueIdentifier>{69A7E91F-BB00-4821-887A-5FF6B9C46CB5}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone\SpookyPhone.Build.cs">
 			<Filter>Source\SpookyPhone</Filter>
@@ -55,10 +55,10 @@
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
 		<Filter Include="Source\SpookyPhone\Resources">
-			<UniqueIdentifier>{A7A2B2D6-702B-4A0C-BD03-16D1E4802C22}</UniqueIdentifier>
+			<UniqueIdentifier>{BBD5DCA1-A42E-4A24-B6A8-A179BBE6CE5C}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="Source\SpookyPhone\Resources\Windows">
-			<UniqueIdentifier>{486A97C3-14B4-4C9A-BD1A-EDC86D820111}</UniqueIdentifier>
+			<UniqueIdentifier>{3B96E3C1-D9F2-49D9-8044-2537E09B5B7E}</UniqueIdentifier>
 		</Filter>
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc">
 			<Filter>Source\SpookyPhone\Resources\Windows</Filter>
