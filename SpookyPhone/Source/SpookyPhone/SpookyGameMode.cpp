@@ -22,11 +22,6 @@ ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& _ObjectInitializer)
 void ASpookyGameMode::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
-
-	if (!Manager)
-	{
-		Manager = GetEventManager();
-	}
 }
 
 AEventManager* ASpookyGameMode::InitializeEventManager()
@@ -50,7 +45,10 @@ void ASpookyGameMode::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	Manager->EventTick(DeltaSeconds);
+	if (Manager)
+	{
+		Manager->EventTick(DeltaSeconds);
+	}
 
 	GEngine->AddOnScreenDebugMessage(1001, 5, FColor::Red, TEXT("AEventSystemGameMode ticking"));
 }

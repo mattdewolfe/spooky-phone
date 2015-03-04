@@ -8,11 +8,11 @@ AEventTrigger::AEventTrigger(const FObjectInitializer& ObjectInitializer)
 {
 	//AEventManager::RegisterEventObject(this);
 
-	static ConstructorHelpers::FObjectFinder<UBlueprint> PlayerPawnObject(TEXT("Blueprint'/Game/Blueprints/EventTrigger'"));
-	if (PlayerPawnObject.Object != NULL)
-	{
-		EventUpdateFunction = ((UClass*)PlayerPawnObject.Object->GeneratedClass)->FindFunctionByName(TEXT("OnEventUpdate"));
-	}
+	//static ConstructorHelpers::FObjectFinder<UBlueprint> PlayerPawnObject(TEXT("Blueprint'/Game/Blueprints/EventTrigger'"));
+	//if (PlayerPawnObject.Object != NULL)
+	//{
+	//	EventUpdateFunction = ((UClass*)PlayerPawnObject.Object->GeneratedClass)->FindFunctionByName(TEXT("OnEventUpdate"));
+	//}
 }
 
 void AEventTrigger::PreInitializeComponents()
@@ -24,10 +24,15 @@ void AEventTrigger::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	AEventManager* Manager = GetWorld()->GetAuthGameMode<ASpookyGameMode>()->GetEventManager();
-	if (Manager)
+	ASpookyGameMode* GameMode = GetWorld()->GetAuthGameMode<ASpookyGameMode>();
+
+	if (GameMode)
 	{
-		Manager->RegisterEventObject(this);
+		AEventManager* Manager = GameMode->GetEventManager();
+		if (Manager)
+		{
+			Manager->RegisterEventObject(this);
+		}
 	}
 }
 
@@ -66,20 +71,26 @@ void AEventTrigger::Start()
 	// Allow any concurrent event object to keep running but others will be unregistered from EventManager
 	GEngine->AddOnScreenDebugMessage(1003, 5, FColor::Blue, FString::Printf(TEXT("AEventTrigger event started")));
 
-	Manager->AddToUpdateList(this);
+	if (Manager)
+	{
+		Manager->AddToUpdateList(this);
+	}
 }
 
-void AEventTrigger::EventUpdate()
+void AEventTrigger::EventUpdate_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(1004, 5, FColor::Red, TEXT("AEventTrigger ticking"));
+	GEngine->AddOnScreenDebugMessage(1004, 5, FColor::Yellow, TEXT("AEventTrigger ticking"));
 
-	if (EventUpdateFunction != NULL)
-	{
-		ProcessEvent(EventUpdateFunction, nullptr);
-	}
+	//if (EventUpdateFunction != NULL)
+	//{
+	//	ProcessEvent(EventUpdateFunction, nullptr);
+	//}
 }
 
 void AEventTrigger::End()
 {
-	Manager->RemoveFromUpdateList(this);
+	if (Manager)
+	{
+		Manager->RemoveFromUpdateList(this);
+	}
 }

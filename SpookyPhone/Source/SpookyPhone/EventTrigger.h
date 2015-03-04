@@ -35,7 +35,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Event)
 	virtual void Start() override;
 
-	virtual void EventUpdate() override;
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Event)
+	void EventUpdate() override;
 
 	UFUNCTION(BlueprintCallable, Category = Event)
 	virtual void End() override;
