@@ -28,6 +28,17 @@ public:
 
 	void SetManager(AEventManager *EventManager) { Manager = EventManager; }
 
+public:
+	/*
+	* Base class should have a way of exposing the variables within blueprint for editing
+	* Do this by marking the variables with property modifier
+	*/
+	uint64 StartEventFlag;
+
+	uint64 PauseEventFlag;
+
+	uint64 EndEventFlag;
+
 protected:
 	AEventManager* Manager;
 
