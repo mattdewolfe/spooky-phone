@@ -45,7 +45,7 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 	ScreenMesh->AttachTo(RootComponent);
 	UMGPhoneWidget->AttachTo(RootComponent);
 
-	bIsHidden = true;
+	bIsHidden = false;
 }
 
 void ASpookyPhoneActor::BeginPlay()
@@ -58,17 +58,20 @@ void ASpookyPhoneActor::BeginPlay()
 	if (world)
 	{
 		// spawn the phone near the pawn
-		Camera = GetWorld()->SpawnActor<APhoneCamera>(APhoneCamera::StaticClass(), FVector(0.f, 0.f, 0.f), FRotator(0.f, -90.f, -90.f));
+		Camera = GetWorld()->SpawnActor<APhoneCamera>(APhoneCamera::StaticClass(), GetActorForwardVector() * FVector(0.f, 10.f, 0.f), FRotator(-90.f, 0.f, -90.f));
 		Camera->AttachRootComponentToActor(this, NAME_None, EAttachLocation::KeepRelativeOffset);
+		Camera->SetActorHiddenInGame(true);
 	}
 
 	UMGPhoneWidget->Activate();
+	UMGPhoneUI = Cast<USpookyPhoneWidget>(UMGPhoneWidget->GetUserWidgetObject());
+
+	TogglePhone();
 }
 
 void ASpookyPhoneActor::TogglePhone()
 {
-	SetActorTickEnabled(bIsHidden);
-	SetActorHiddenInGame(bIsHidden);
+	SetActorHiddenInGame(!bIsHidden);
 	bIsHidden = !bIsHidden;
 }
 
@@ -84,13 +87,31 @@ void ASpookyPhoneActor::TogglePhoneUI()
 		UMGPhoneWidget->Deactivate();
 		UMGPhoneWidget->SetHiddenInGame(true);
 		UMGPhoneWidget->SetComponentTickEnabled(false);
-		UMGPhoneWidget->SetVisibility(ESlateVisibility::Visible);
+		UMGPhoneWidget->SetVisibility(true);
 	}
 	else
 	{
 		UMGPhoneWidget->Activate();
 		UMGPhoneWidget->SetHiddenInGame(false);
 		UMGPhoneWidget->SetComponentTickEnabled(true);
-		UMGPhoneWidget->SetVisibility(ESlateVisibility::Hidden);
+		UMGPhoneWidget->SetVisibility(false);
 	}
+}
+
+void ASpookyPhoneActor::ShowCamera()
+{
+	TogglePhoneUI();
+	Camera->SetActorHiddenInGame(true);
+	ScreenMesh->SetMaterial(0, Camera->cameraMaterial);
+	//Camera->GetCaptureComponent2D()->TextureTarget
+}
+
+void ASpookyPhoneActor::NavigateByDirection(ENavigationDirection Direction)
+{
+	UMGPhoneUI->SelectNextApp(Direction);
+}
+
+void ASpookyPhoneActor::Select()
+{
+	UMGPhoneUI->Select();
 }

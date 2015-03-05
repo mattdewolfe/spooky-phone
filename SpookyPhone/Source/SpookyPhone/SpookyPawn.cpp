@@ -23,6 +23,12 @@ ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
 
 	PrimaryActorTick.bCanEverTick = true;
 	wheelMotionPrecision = 0.2f;
+
+	bUseControllerRotationPitch = true;
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationRoll = true;
+
+	bUsingPhone = false;
 }
 
 void ASpookyPawn::BeginPlay()
@@ -30,19 +36,22 @@ void ASpookyPawn::BeginPlay()
 	Super::BeginPlay();
 
 	// get a reference to the world
-	UWorld* world = GetWorld();
+	UWorld* World = GetWorld();
 
-	if (world)
+	if (World)
 	{
 		// spawn the phone near the pawn
-		Phone = GetWorld()->SpawnActor<ASpookyPhoneActor>(PhoneClass, FVector(50.f, 0.f, 50.f), FRotator(0.f, 90.f, 90.f));
+		Phone = GetWorld()->SpawnActor<ASpookyPhoneActor>(PhoneClass, FVector(90.f, 0.f, 50.f), FRotator(0.f, 90.f, 90.f));
 		Phone->AttachRootComponentToActor(this, NAME_None, EAttachLocation::KeepRelativeOffset);
 	}
 }
 
 void ASpookyPawn::Tick(float _DeltaTime)
 {
-	CalculateAndApplyMovement();
+	Super::Tick(_DeltaTime);
+
+	if (bUsingPhone)
+		CalculateAndApplyMovement();
 }
 
 // First attempt at tank controls for wheelchair.
@@ -80,6 +89,14 @@ void ASpookyPawn::SetupPlayerInputComponent(UInputComponent * _InputComponent)
 	//	_InputComponent->BindAxis("Turn", this, &ASpookyPawn::Turn);
 	_InputComponent->BindAxis("LeftWheel", this, &ASpookyPawn::LeftWheelMoved);
 	_InputComponent->BindAxis("RightWheel", this, &ASpookyPawn::RightWheelMoved);
+	_InputComponent->BindAction("TogglePhone", IE_Pressed, this, &ASpookyPawn::TogglePhone);
+
+	_InputComponent->BindAction("NavigationUp", IE_Pressed, this, &ASpookyPawn::NavigatePhoneUp);
+	_InputComponent->BindAction("NavigationDown", IE_Pressed, this, &ASpookyPawn::NavigatePhoneDown);
+	_InputComponent->BindAction("NavigationLeft", IE_Pressed, this, &ASpookyPawn::NavigatePhoneLeft);
+	_InputComponent->BindAction("NavigationRight", IE_Pressed, this, &ASpookyPawn::NavigatePhoneRight);
+
+	_InputComponent->BindAction("Use", IE_Pressed, this, &ASpookyPawn::Use);
 }
 
 void ASpookyPawn::LeftWheelMoved(float _value)
@@ -112,4 +129,38 @@ FRotator ASpookyPawn::GetViewRotation() const
 	return GetActorRotation();
 }
 
+void ASpookyPawn::TogglePhone()
+{
+	bUsingPhone = !bUsingPhone;
+	Phone->TogglePhone();
+}
 
+void ASpookyPawn::NavigatePhoneUp()
+{
+	if (bUsingPhone)
+		Phone->NavigateByDirection(ENavigationDirection::Up);
+}
+
+void ASpookyPawn::NavigatePhoneDown()
+{
+	if (bUsingPhone)
+		Phone->NavigateByDirection(ENavigationDirection::Down);
+}
+
+void ASpookyPawn::NavigatePhoneLeft()
+{
+	if (bUsingPhone)
+		Phone->NavigateByDirection(ENavigationDirection::Left);
+}
+
+void ASpookyPawn::NavigatePhoneRight()
+{
+	if (bUsingPhone)
+		Phone->NavigateByDirection(ENavigationDirection::Right);
+}
+
+void ASpookyPawn::Use()
+{
+	if (bUsingPhone)
+		Phone->Select();
+}

@@ -4,31 +4,40 @@
 
 #include "WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "SpookyPhoneAppWidget.h"
 #include "SpookyPhoneWidget.generated.h"
 
-/**
- * 
- */
+UENUM()
+enum ENavigationDirection
+{
+	Up,
+	Down,
+	Right,
+	Left
+};
+
 UCLASS()
 class SPOOKYPHONE_API USpookyPhoneWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
-	// handle keyboard input on the widget
-	virtual FEventReply OnKeyDown_Implementation(FGeometry MyGeometry, FKeyboardEvent InKeyboardEvent) override;
+public:
+	USpookyPhoneWidget(const FObjectInitializer & ObjectInitializer);
 
 	void Construct_Implementation() override;
 
-	void AddButton();
-	
-private:
 	// select the next app in the widget
 	UFUNCTION()
-	void SelectNextApp();
+	void SelectNextApp(ENavigationDirection Direction);
 
-	UPROPERTY()
-	bool bLockControls;
+	UFUNCTION()
+	void Select();
+	
+private:
+	TArray<USpookyPhoneAppWidget*> Apps;
 
-	UPROPERTY(VisibleDefaultsOnly)
-	int32 Apps;
+	int32 SelectedApp;
+
+	int32 NumRows;
+	int32 NumColumns;
 };

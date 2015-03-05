@@ -14,13 +14,15 @@ class SPOOKYPHONE_API ASpookyPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
+	virtual void BeginPlay() override;
+
 	virtual void UpdateRotation(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Pawn")
-		FRotator GetViewRotation() const;
+	FRotator GetViewRotation() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Pawn")
-		virtual void SetViewRotation(const FRotator& NewRotation);
+	virtual void SetViewRotation(const FRotator& NewRotation);
 
 	virtual void SetControlRotation(const FRotator& NewRotation) override;
 

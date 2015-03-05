@@ -2,43 +2,79 @@
 
 #include "SpookyPhone.h"
 #include "SpookyPhoneWidget.h"
+#include "SpookyPhoneAppWidget.h"
 
-FEventReply USpookyPhoneWidget::OnKeyDown_Implementation(FGeometry MyGeometry, FKeyboardEvent InKeyboardEvent)
+USpookyPhoneWidget::USpookyPhoneWidget(const FObjectInitializer & ObjectInitializer) :
+	Super(ObjectInitializer)
 {
-	if (bLockControls)
-	{
-		FEventReply Reply;
-		Reply.NativeReply = FReply::Handled();
-		return Reply;
-	}
-	else if (InKeyboardEvent.GetKey() == EKeys::Right)
-	{
-		SelectNextApp();
-
-		FEventReply Reply;
-		Reply.NativeReply = FReply::Handled();
-		return Reply;
-	}
-	else
-	{
-		return Super::OnKeyDown_Implementation(MyGeometry, InKeyboardEvent);
-	}
+	SelectedApp = 0;
+	NumRows = 5;
+	NumColumns = 3;
 }
 
 void USpookyPhoneWidget::Construct_Implementation()
 {
 	Super::Construct_Implementation();
-}
 
-void AddButton()
-{
-	
-}
+	TArray<UWidget*> Widgets;
+	WidgetTree->GetAllWidgets(Widgets);
 
-void USpookyPhoneWidget::SelectNextApp()
-{
-	if (GEngine)
+	for (UWidget* Widget : Widgets)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("next app!")));
+		USpookyPhoneAppWidget* App = Cast<USpookyPhoneAppWidget>(Widget);
+		if (App)
+		{
+			Apps.Add(App);
+		}
 	}
+
+	Apps[SelectedApp]->Select();
+}
+
+void USpookyPhoneWidget::SelectNextApp(ENavigationDirection Direction)
+{
+	if (Apps.Num() == 0)
+		return;
+
+	Apps[SelectedApp]->Unselect();
+
+	switch (Direction)
+	{
+	case Up:
+		SelectedApp -= NumColumns;
+		if (SelectedApp < 0)
+		{
+			SelectedApp += Apps.Num();
+		}
+		break;
+	case Down:
+		SelectedApp += NumColumns;
+		if (SelectedApp >= Apps.Num())
+		{
+			SelectedApp -= Apps.Num();
+		}
+		break;
+		break;
+	case Right:
+		SelectedApp++;
+		if (SelectedApp >= Apps.Num())
+		{
+			SelectedApp = 0;
+		}
+		break;
+	case Left:
+		SelectedApp--;
+		if (SelectedApp < 0)
+		{
+			SelectedApp = Apps.Num() - 1;
+		}
+		break;
+	}
+
+	Apps[SelectedApp]->Select();
+}
+
+void USpookyPhoneWidget::Select()
+{
+	Apps[SelectedApp]->OnAppClicked();
 }

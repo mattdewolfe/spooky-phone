@@ -4,6 +4,16 @@
 #include "SpookyPlayerController.h"
 #include "IHeadMountedDisplay.h"
 
+void ASpookyPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	bShowMouseCursor = false;
+	bEnableClickEvents = false;
+	bEnableMouseOverEvents = false;
+
+	DisableInput(this);
+}
+
 void ASpookyPlayerController::UpdateRotation(float DeltaTime)
 {
 	// Calculate Delta to be applied on ViewRotation
@@ -73,7 +83,3 @@ FRotator ASpookyPlayerController::GetViewRotation() const
 {
 	return ViewRotation;
 }
-
-
-
-

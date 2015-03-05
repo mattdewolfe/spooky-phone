@@ -17,12 +17,6 @@ class SPOOKYPHONE_API ASpookyPawn : public APawn
 public:
 	ASpookyPawn(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY(BlueprintReadOnly, Category = Movement)
-	UMovementComponent* MovementComponent;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
-	UCapsuleComponent* ColliderComponent;
-
 	// Get rotation function override for implementation of seperating
 	// VR look rotation from the pawn rotation
 	virtual FRotator GetViewRotation() const override;
@@ -33,19 +27,33 @@ public:
 	void MoveForward(float _value);
 	void Turn(float _value);
 
+	virtual void BeginPlay() override;
+	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
+	virtual void Tick(float _DeltaTime);
+
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	UMovementComponent* MovementComponent;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
+	UCapsuleComponent* ColliderComponent;
+
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	UClass* PhoneClass;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	ASpookyPhoneActor* Phone;
-	
-//	void TogglePhone();
-
-	virtual void BeginPlay() override;
-	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
-	virtual void Tick(float _DeltaTime);
 
 private:
+	void TogglePhone();
+	
+	void NavigatePhoneUp();
+	void NavigatePhoneDown();
+	void NavigatePhoneLeft();
+	void NavigatePhoneRight();
+	void Use();
+
+	bool bUsingPhone;
+
 	// Stores value from each axis 
 	float leftWheelMotion;
 	float rightWheelMotion;

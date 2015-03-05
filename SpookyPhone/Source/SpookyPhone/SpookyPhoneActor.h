@@ -8,9 +8,6 @@
 #include "GameFramework/Actor.h"
 #include "SpookyPhoneActor.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SPOOKYPHONE_API ASpookyPhoneActor : public AActor
 {
@@ -21,7 +18,10 @@ public:
 
 	void TogglePhone();
 	void TogglePhoneUI();
+	void ShowCamera();
 
+	void NavigateByDirection(ENavigationDirection Direction);
+	void Select();
 protected:
 	virtual void BeginPlay() override;
 

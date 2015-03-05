@@ -37,6 +37,7 @@ protected:
 	//
 public:
 	//constructor.
+	APhoneCamera(const FObjectInitializer& ObjectInitializer);
 	//maybe takes in what it is going to be locked to and its render target. 
 	void BeginPlay() override;
 	//destructore. 
@@ -52,4 +53,7 @@ public:
 	texturePTR DisplayPicture(int _index);
 	//pops a given picture from the vector. 
 	bool DeletePicture(int _index);
+
+	UMaterial* cameraMaterial;
+	UTextureRenderTarget2D* renderTarget;
 };
