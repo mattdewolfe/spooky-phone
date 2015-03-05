@@ -18,3 +18,37 @@ ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& _ObjectInitializer)
 	DefaultPawnClass = ASpookyPawn::StaticClass();
 	PlayerControllerClass = ASpookyPlayerController::StaticClass();
 }
+
+void ASpookyGameMode::PreInitializeComponents()
+{
+	Super::PreInitializeComponents();
+}
+
+AEventManager* ASpookyGameMode::InitializeEventManager()
+{
+	AEventManager* InstantiatedManager = GetWorld()->SpawnActor<AEventManager>();
+
+	return InstantiatedManager;
+}
+
+AEventManager* ASpookyGameMode::GetEventManager()
+{
+	if (!Manager)
+	{
+		Manager = InitializeEventManager();
+	}
+
+	return Manager;
+}
+
+void ASpookyGameMode::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (Manager)
+	{
+		Manager->EventTick(DeltaSeconds);
+	}
+
+	GEngine->AddOnScreenDebugMessage(1001, 5, FColor::Red, TEXT("AEventSystemGameMode ticking"));
+}
