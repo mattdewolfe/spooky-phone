@@ -50,6 +50,12 @@
 		<None Include="..\..\Config\DefaultEditor.ini" />
 		<None Include="..\..\Config\DefaultEngine.ini" />
 		<None Include="..\..\Config\DefaultInput.ini" />
+		<ClCompile Include="..\..\Source\SpookyPhone\EventManager.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\EventManager.h" />
+		<ClCompile Include="..\..\Source\SpookyPhone\EventObjectInterface.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\EventObjectInterface.h" />
+		<ClCompile Include="..\..\Source\SpookyPhone\EventTrigger.cpp" />
+		<ClInclude Include="..\..\Source\SpookyPhone\EventTrigger.h" />
 		<ClCompile Include="..\..\Source\SpookyPhone\PhoneCamera.cpp" />
 		<ClInclude Include="..\..\Source\SpookyPhone\PhoneCamera.h" />
 		<ClCompile Include="..\..\Source\SpookyPhone\SpookyGameMode.cpp" />
