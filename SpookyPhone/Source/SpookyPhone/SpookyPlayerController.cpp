@@ -7,9 +7,10 @@
 void ASpookyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	bShowMouseCursor = false;
-	bEnableClickEvents = false;
-	bEnableMouseOverEvents = false;
+
+	//bShowMouseCursor = false;
+	//bEnableClickEvents = false;
+	//bEnableMouseOverEvents = false;
 
 	DisableInput(this);
 }

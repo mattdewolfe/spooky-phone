@@ -64,7 +64,7 @@ void ASpookyPhoneActor::BeginPlay()
 	}
 
 	UMGPhoneWidget->Activate();
-	UMGPhoneUI = Cast<USpookyPhoneWidget>(UMGPhoneWidget->GetUserWidgetObject());
+	UMGPhoneUI = Cast<UScreenWidget>(UMGPhoneWidget->GetUserWidgetObject());
 
 	TogglePhone();
 }

@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SpookyPhone.h"
-#include "SpookyPhoneAppWidget.h"
+#include "UIWidget.h"
 #include "Text.h"
 
-void USpookyPhoneAppWidget::Construct_Implementation()
+void UUIWidget::Construct_Implementation()
 {
 	Super::Construct_Implementation();
 
@@ -15,17 +15,17 @@ void USpookyPhoneAppWidget::Construct_Implementation()
 	SelectedStyle = AppButton->WidgetStyle.Hovered;
 }
 
-void USpookyPhoneAppWidget::OnAppClicked()
+void UUIWidget::OnAppClicked()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Button Clicked"));
 }
 
-void USpookyPhoneAppWidget::Select()
+void UUIWidget::Select()
 {
 	AppButton->WidgetStyle.SetNormal(SelectedStyle);
 }
 
-void USpookyPhoneAppWidget::Unselect()
+void UUIWidget::Unselect()
 {
 	AppButton->WidgetStyle.SetNormal(NormalStyle);
 }

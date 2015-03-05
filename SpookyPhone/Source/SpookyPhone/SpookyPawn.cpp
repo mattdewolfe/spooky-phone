@@ -50,7 +50,7 @@ void ASpookyPawn::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (bUsingPhone)
+	if (!bUsingPhone)
 		CalculateAndApplyMovement();
 }
 

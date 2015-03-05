@@ -2,14 +2,14 @@
 
 #pragma once
 
-#include "SpookyPhoneAppWidget.h"
+#include "UIWidget.h"
 #include "CameraAppWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SPOOKYPHONE_API UCameraAppWidget : public USpookyPhoneAppWidget
+class SPOOKYPHONE_API UCameraAppWidget : public UUIWidget
 {
 	GENERATED_BODY()
 	

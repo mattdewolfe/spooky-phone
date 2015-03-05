@@ -4,8 +4,8 @@
 
 #include "WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
-#include "SpookyPhoneAppWidget.h"
-#include "SpookyPhoneWidget.generated.h"
+#include "UIWidget.h"
+#include "ScreenWidget.generated.h"
 
 UENUM()
 enum ENavigationDirection
@@ -17,12 +17,12 @@ enum ENavigationDirection
 };
 
 UCLASS()
-class SPOOKYPHONE_API USpookyPhoneWidget : public UUserWidget
+class SPOOKYPHONE_API UScreenWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
 public:
-	USpookyPhoneWidget(const FObjectInitializer & ObjectInitializer);
+	UScreenWidget(const FObjectInitializer & ObjectInitializer);
 
 	void Construct_Implementation() override;
 
@@ -34,9 +34,9 @@ public:
 	void Select();
 	
 private:
-	TArray<USpookyPhoneAppWidget*> Apps;
+	TArray<UUIWidget*> UIElements;
 
-	int32 SelectedApp;
+	int32 SelectedUIElement;
 
 	int32 NumRows;
 	int32 NumColumns;

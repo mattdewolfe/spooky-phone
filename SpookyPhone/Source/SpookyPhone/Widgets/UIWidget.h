@@ -3,10 +3,10 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
-#include "SpookyPhoneAppWidget.generated.h"
+#include "UIWidget.generated.h"
 
 UCLASS()
-class SPOOKYPHONE_API USpookyPhoneAppWidget : public UUserWidget
+class SPOOKYPHONE_API UUIWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	

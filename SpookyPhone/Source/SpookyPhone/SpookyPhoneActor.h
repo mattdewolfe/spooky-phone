@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "SpookyPhoneWidget.h"
+#include "Widgets/ScreenWidget.h"
 #include "PhoneCamera.h"
 
 #include "GameFramework/Actor.h"
@@ -43,7 +43,7 @@ private:
 	UWidgetComponent* UMGPhoneWidget;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = UMG)
-	USpookyPhoneWidget* UMGPhoneUI;
+	UScreenWidget* UMGPhoneUI;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
 	APhoneCamera* Camera;
