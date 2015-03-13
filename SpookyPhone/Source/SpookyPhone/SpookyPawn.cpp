@@ -2,14 +2,13 @@
 
 #include "SpookyPhone.h"
 #include "SpookyPawn.h"
-#include "SpookyPhone.h"
 #include "SpookyPlayerController.h"
 
 ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
 	: Super(_ObjectInitializer)
 {
 	ColliderComponent = _ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("ColliderComponent"));
-	ColliderComponent->SetCapsuleSize(5.0f, 5.0f);
+	ColliderComponent->SetCapsuleSize(7.0f, 7.0f);
 	RootComponent = ColliderComponent;
 
 	MovementComponent = _ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));

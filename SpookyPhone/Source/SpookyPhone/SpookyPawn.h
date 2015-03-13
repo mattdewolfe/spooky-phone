@@ -31,7 +31,7 @@ public:
 	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
 	virtual void Tick(float _DeltaTime);
 
-	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Movement)
 	UMovementComponent* MovementComponent;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
@@ -57,6 +57,7 @@ private:
 	// Stores value from each axis 
 	float leftWheelMotion;
 	float rightWheelMotion;
+
 	// Use to determine how much of a difference in axis value we will ignore
 	float wheelMotionPrecision;
 };
