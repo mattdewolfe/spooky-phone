@@ -19,8 +19,11 @@ public:
 	void Select();
 	void Unselect();
 
-	UButton* AppButton;
-	UTextBlock* AppText;
+	UButton* Button;
+	UTextBlock* ButtonText;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Position)
+	int32 RowNumber;
 
 	FSlateBrush NormalStyle;
 	FSlateBrush SelectedStyle;

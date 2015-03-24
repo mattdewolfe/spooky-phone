@@ -8,11 +8,11 @@ void UUIWidget::Construct_Implementation()
 {
 	Super::Construct_Implementation();
 
-	AppButton = (UButton*)GetWidgetFromName(TEXT("AppButton"));
-	AppText = (UTextBlock*)GetWidgetFromName(TEXT("AppText"));
+	Button = (UButton*)GetWidgetFromName(TEXT("Button"));
+	ButtonText = (UTextBlock*)GetWidgetFromName(TEXT("ButtonText"));
 
-	NormalStyle = AppButton->WidgetStyle.Normal;
-	SelectedStyle = AppButton->WidgetStyle.Hovered;
+	NormalStyle = Button->WidgetStyle.Normal;
+	SelectedStyle = Button->WidgetStyle.Hovered;
 }
 
 void UUIWidget::OnAppClicked()
@@ -22,10 +22,10 @@ void UUIWidget::OnAppClicked()
 
 void UUIWidget::Select()
 {
-	AppButton->WidgetStyle.SetNormal(SelectedStyle);
+	Button->WidgetStyle.SetNormal(SelectedStyle);
 }
 
 void UUIWidget::Unselect()
 {
-	AppButton->WidgetStyle.SetNormal(NormalStyle);
+	Button->WidgetStyle.SetNormal(NormalStyle);
 }

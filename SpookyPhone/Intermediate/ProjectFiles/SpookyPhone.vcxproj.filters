@@ -4,7 +4,7 @@
 	<ItemGroup>
 		<None Include="..\..\SpookyPhone.uproject" />
 		<Filter Include="Source">
-			<UniqueIdentifier>{E97B4892-57D7-4995-BB0F-400A841EEEC3}</UniqueIdentifier>
+			<UniqueIdentifier>{7D11BC10-F708-4822-8DD5-B693DF8C8013}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\SpookyPhone.Target.cs">
 			<Filter>Source</Filter>
@@ -13,7 +13,7 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
-			<UniqueIdentifier>{E60CE5A9-C4E3-4BA6-A615-24C0EFC72893}</UniqueIdentifier>
+			<UniqueIdentifier>{FE18CAD6-E554-448D-BB3F-CD8BD5F4D4B4}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -25,7 +25,7 @@
 			<Filter>Config</Filter>
 		</None >
 		<Filter Include="Source\SpookyPhone">
-			<UniqueIdentifier>{E7BAEE91-C4C0-4670-9230-C381429933E4}</UniqueIdentifier>
+			<UniqueIdentifier>{8F76F26B-2456-4134-8FE9-8BDCD62BB4CB}</UniqueIdentifier>
 		</Filter>
 		<ClCompile Include="..\..\Source\SpookyPhone\EventManager.cpp">
 			<Filter>Source\SpookyPhone</Filter>
@@ -85,21 +85,21 @@
 			<Filter>Source\SpookyPhone</Filter>
 		</ClInclude >
 		<Filter Include="Source\SpookyPhone\Resources">
-			<UniqueIdentifier>{F5A83CAD-4EFB-40F4-AF95-1EF876B0A6A2}</UniqueIdentifier>
+			<UniqueIdentifier>{B5BB8F8C-0821-414F-8931-87C7B882EC69}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="Source\SpookyPhone\Resources\Windows">
-			<UniqueIdentifier>{0B6CADA4-3D8E-46FD-BFF0-BEE5D8FB0F21}</UniqueIdentifier>
+			<UniqueIdentifier>{FEE5BD70-C604-4F25-B7EC-62159252BBBE}</UniqueIdentifier>
 		</Filter>
 		<ResourceCompile Include="..\..\Source\SpookyPhone\Resources\Windows\SpookyPhone.rc">
 			<Filter>Source\SpookyPhone\Resources\Windows</Filter>
 		</ResourceCompile >
 		<Filter Include="Source\SpookyPhone\Widgets">
-			<UniqueIdentifier>{3CF0AF6F-04FF-447A-98CA-4984816D37C4}</UniqueIdentifier>
+			<UniqueIdentifier>{E126B5CE-399E-400C-BF25-637C3F007D9B}</UniqueIdentifier>
 		</Filter>
-		<ClCompile Include="..\..\Source\SpookyPhone\Widgets\CameraAppWidget.cpp">
+		<ClCompile Include="..\..\Source\SpookyPhone\Widgets\HomeButtonWidget.cpp">
 			<Filter>Source\SpookyPhone\Widgets</Filter>
 		</ClCompile >
-		<ClInclude Include="..\..\Source\SpookyPhone\Widgets\CameraAppWidget.h">
+		<ClInclude Include="..\..\Source\SpookyPhone\Widgets\HomeButtonWidget.h">
 			<Filter>Source\SpookyPhone\Widgets</Filter>
 		</ClInclude >
 		<ClCompile Include="..\..\Source\SpookyPhone\Widgets\ScreenWidget.cpp">
@@ -113,6 +113,15 @@
 		</ClCompile >
 		<ClInclude Include="..\..\Source\SpookyPhone\Widgets\UIWidget.h">
 			<Filter>Source\SpookyPhone\Widgets</Filter>
+		</ClInclude >
+		<Filter Include="Source\SpookyPhone\Widgets\Camera">
+			<UniqueIdentifier>{E8D913C0-7D1A-45CA-BC83-4C1D1704314F}</UniqueIdentifier>
+		</Filter>
+		<ClCompile Include="..\..\Source\SpookyPhone\Widgets\Camera\CameraAppWidget.cpp">
+			<Filter>Source\SpookyPhone\Widgets\Camera</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\SpookyPhone\Widgets\Camera\CameraAppWidget.h">
+			<Filter>Source\SpookyPhone\Widgets\Camera</Filter>
 		</ClInclude >
 	</ItemGroup>
 </Project>

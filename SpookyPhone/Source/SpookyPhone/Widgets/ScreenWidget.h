@@ -25,19 +25,25 @@ public:
 	UScreenWidget(const FObjectInitializer & ObjectInitializer);
 
 	void Construct_Implementation() override;
+	void Init();
 
 	// select the next app in the widget
 	UFUNCTION()
-	void SelectNextApp(ENavigationDirection Direction);
+	void HoverNextApp(ENavigationDirection Direction);
+	void HoverApp(int32 RowNumber = 0, int32 AppNumber = 0);
 
 	UFUNCTION()
 	void Select();
+	void Unselect();
+
+	void AddWidgetToRow(UUIWidget* Widget, int32 Row = -1);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Position)
+	int32 NumRows;
 	
 private:
-	TArray<UUIWidget*> UIElements;
+	TArray<TArray<UUIWidget*>> UIElements;
 
+	int32 SelectedRow;
 	int32 SelectedUIElement;
-
-	int32 NumRows;
-	int32 NumColumns;
 };

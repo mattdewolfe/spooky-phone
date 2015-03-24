@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "UIWidget.h"
+#include "Widgets/UIWidget.h"
 #include "CameraAppWidget.generated.h"
 
 /**
