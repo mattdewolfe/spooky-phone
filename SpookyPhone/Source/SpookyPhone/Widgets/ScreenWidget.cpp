@@ -7,14 +7,24 @@
 UScreenWidget::UScreenWidget(const FObjectInitializer & ObjectInitializer) :
 	Super(ObjectInitializer)
 {
+	SelectedRow = 0;
 	SelectedUIElement = 0;
-	NumRows = 5;
-	NumColumns = 3;
+
+	//for (int i = 0; i < NumRows; i++)
+		//UIElements.Add(TArray<UUIWidget*>());
+}
+
+void UScreenWidget::Init()
+{
+	for (int i = 0; i < NumRows; i++)
+		UIElements.Add(TArray<UUIWidget*>());
 }
 
 void UScreenWidget::Construct_Implementation()
 {
 	Super::Construct_Implementation();
+
+	//UIElements.Empty();
 
 	TArray<UWidget*> Widgets;
 	WidgetTree->GetAllWidgets(Widgets);
@@ -24,39 +34,43 @@ void UScreenWidget::Construct_Implementation()
 		UUIWidget* App = Cast<UUIWidget>(Widget);
 		if (App)
 		{
-			UIElements.Add(App);
+			UIElements[App->RowNumber].Add(App);
 		}
 	}
 
-	UIElements[SelectedUIElement]->Select();
+	UIElements[SelectedRow][SelectedUIElement]->Select();
 }
 
-void UScreenWidget::SelectNextApp(ENavigationDirection Direction)
+void UScreenWidget::HoverNextApp(ENavigationDirection Direction)
 {
 	if (UIElements.Num() == 0)
 		return;
 
-	UIElements[SelectedUIElement]->Unselect();
+	UIElements[SelectedRow][SelectedUIElement]->Unselect();
 
 	switch (Direction)
 	{
 	case Up:
-		SelectedUIElement -= NumColumns;
-		if (SelectedUIElement < 0)
+		SelectedRow--;
+		if (SelectedRow < 0)
 		{
-			SelectedUIElement += UIElements.Num();
+			SelectedRow = NumRows - 1;
 		}
+		if (SelectedUIElement >= UIElements[SelectedRow].Num())
+			SelectedUIElement = UIElements[SelectedRow].Num() - 1;
 		break;
 	case Down:
-		SelectedUIElement += NumColumns;
-		if (SelectedUIElement >= UIElements.Num())
+		SelectedRow++;
+		if (SelectedRow >= NumRows)
 		{
-			SelectedUIElement -= UIElements.Num();
+			SelectedRow = 0;
 		}
+		if (SelectedUIElement >= UIElements[SelectedRow].Num())
+			SelectedUIElement = UIElements[SelectedRow].Num() - 1;
 		break;
 	case Right:
 		SelectedUIElement++;
-		if (SelectedUIElement >= UIElements.Num())
+		if (SelectedUIElement >= UIElements[SelectedRow].Num())
 		{
 			SelectedUIElement = 0;
 		}
@@ -65,15 +79,42 @@ void UScreenWidget::SelectNextApp(ENavigationDirection Direction)
 		SelectedUIElement--;
 		if (SelectedUIElement < 0)
 		{
-			SelectedUIElement = UIElements.Num() - 1;
+			SelectedUIElement = UIElements[SelectedRow].Num() - 1;
 		}
 		break;
 	}
 
-	UIElements[SelectedUIElement]->Select();
+	UIElements[SelectedRow][SelectedUIElement]->Select();
+}
+
+void UScreenWidget::HoverApp(int32 RowNumber /*= 0*/, int32 AppNumber /*= 0*/)
+{
+	UIElements[SelectedRow][SelectedUIElement]->Unselect();
+	
+	SelectedRow = RowNumber;
+	SelectedUIElement = AppNumber;
+
+	UIElements[SelectedRow][SelectedUIElement]->Select();
 }
 
 void UScreenWidget::Select()
 {
-	UIElements[SelectedUIElement]->OnAppClicked();
+	UIElements[SelectedRow][SelectedUIElement]->OnAppClicked();
+}
+
+void UScreenWidget::Unselect()
+{
+	UIElements[SelectedRow][SelectedUIElement]->Unselect();
+}
+
+void UScreenWidget::AddWidgetToRow(UUIWidget* Widget, int32 Row /*= -1*/)
+{
+	if (Row < 0 || Row >= NumRows)
+	{
+		UIElements.Add(TArray<UUIWidget*>());
+		Row = NumRows;
+		NumRows++;
+	}
+
+	UIElements[Row].Add(Widget);
 }

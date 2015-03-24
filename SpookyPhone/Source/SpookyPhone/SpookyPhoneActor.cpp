@@ -35,16 +35,23 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 	ScreenMesh->SetRelativeLocation(FVector(0.f, 0.f, 4.59f));
 
 	// Create the widget component
-	UMGPhoneWidget = ObjectInitializer.CreateDefaultSubobject<UWidgetComponent>(this, TEXT("PhoneWidget"));
-	UMGPhoneWidget->SetRelativeScale3D(FVector(0.3f, 0.3f, 1.f));
-	UMGPhoneWidget->SetRelativeLocation(FVector(-15.f, -26.5f, 4.6f));
-	UMGPhoneWidget->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
+	UMGPhoneHomeWidget = ObjectInitializer.CreateDefaultSubobject<UWidgetComponent>(this, TEXT("HomeButtonWidget"));
+	//UMGPhoneHomeWidget->SetRelativeScale3D(FVector(0.3f, 0.3f, 1.f));
+	//UMGPhoneHomeWidget->SetRelativeLocation(FVector(-15.f, -26.5f, 4.6f));
+	//UMGPhoneHomeWidget->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
+
+	ConstructorHelpers::FObjectFinder<UBlueprint> phoneWidgetBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_Screens.BP_Screens'"));
+	if (phoneWidgetBlueprint.Object)
+	{
+		PhoneWidgetBlueprint = (UClass*)phoneWidgetBlueprint.Object->GeneratedClass;
+	}
 
 	// Root component of this actor is the phone's static mesh
 	RootComponent = PhoneMesh;
 	ScreenMesh->AttachTo(RootComponent);
-	UMGPhoneWidget->AttachTo(RootComponent);
+	UMGPhoneHomeWidget->AttachTo(RootComponent);
 
+	CurrentScreen = HOME;
 	bIsHidden = false;
 }
 
@@ -53,65 +60,113 @@ void ASpookyPhoneActor::BeginPlay()
 	Super::BeginPlay();
 
 	// get a reference to the world
-	UWorld* world = GetWorld();
+	UWorld* World = GetWorld();
 
-	if (world)
+	if (World)
 	{
-		// spawn the phone near the pawn
-		Camera = GetWorld()->SpawnActor<APhoneCamera>(APhoneCamera::StaticClass(), GetActorForwardVector() * FVector(0.f, 10.f, 0.f), FRotator(-90.f, 0.f, -90.f));
+		// Spawn the camera for the phone
+		Camera = World->SpawnActor<APhoneCamera>(APhoneCamera::StaticClass(), GetActorForwardVector() * FVector(0.f, 10.f, 0.f), FRotator(-90.f, 0.f, -90.f));
 		Camera->AttachRootComponentToActor(this, NAME_None, EAttachLocation::KeepRelativeOffset);
 		Camera->SetActorHiddenInGame(true);
+
+		// Setup the home button
+		UMGPhoneHomeWidget->Activate();
+		UMGHomeButton = Cast<UHomeButtonWidget>(UMGPhoneHomeWidget->GetUserWidgetObject());
+
+		// Spawn all of the screens
+		PhoneUI = GetWorld()->SpawnActor<AActor>(PhoneWidgetBlueprint, FVector::ZeroVector, FRotator::ZeroRotator);
+		PhoneUI->AttachRootComponentToActor(this, NAME_None, EAttachLocation::KeepRelativeOffset);
+
+		// Load the screens into relative arrays
+		TArray<UActorComponent*> Screens = PhoneUI->GetComponents();
+		ScreenWidgetComponents.AddZeroed(Screens.Num());
+		ScreenWidgets.AddZeroed(Screens.Num());
+		for (int32 i = 0; i < Screens.Num(); i++)
+		{
+			ScreenWidgetComponents[i] = Cast<UWidgetComponent>(Screens[i]);
+			ScreenWidgets[i] = Cast<UScreenWidget>(ScreenWidgetComponents[i]->GetUserWidgetObject());
+
+			ScreenWidgets[i]->Init();
+			ScreenWidgets[i]->AddWidgetToRow(UMGHomeButton);
+
+			if (i == 0)
+			{
+				ScreenWidgetComponents[i]->SetRelativeLocation(FVector(0.f, 0.f, 4.61f));
+				ScreenWidgetComponents[i]->SetRelativeScale3D(FVector(0.3f, 0.3f, 1.f));
+			}
+		
+			if (i != CurrentScreen)
+				ScreenWidgetComponents[i]->SetVisibility(false);
+		}
 	}
 
-	UMGPhoneWidget->Activate();
-	UMGPhoneUI = Cast<UScreenWidget>(UMGPhoneWidget->GetUserWidgetObject());
-
+	GoToScreen(CurrentScreen);
 	TogglePhone();
+}
+
+void ASpookyPhoneActor::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
 }
 
 void ASpookyPhoneActor::TogglePhone()
 {
 	SetActorHiddenInGame(!bIsHidden);
+	PhoneUI->SetActorHiddenInGame(!bIsHidden);
 	bIsHidden = !bIsHidden;
 }
 
-void ASpookyPhoneActor::TogglePhoneUI()
+void ASpookyPhoneActor::GoToScreen(EScreens Screen)
 {
-	if (GEngine)
+	/*if (UMGPhoneScreenWidget->IsActive())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("test, %d"), UMGPhoneWidget->IsActive()));
-	}
+		UMGPhoneScreen->SetVisibility(ESlateVisibility::Hidden);
+		UMGPhoneScreenWidget->Deactivate();
+		UMGPhoneScreenWidget->SetHiddenInGame(true);
+		UMGPhoneScreenWidget->SetComponentTickEnabled(false);
+		UMGPhoneScreenWidget->SetVisibility(true);
+	}*/
 
-	if (UMGPhoneWidget->IsActive())
-	{
-		UMGPhoneWidget->Deactivate();
-		UMGPhoneWidget->SetHiddenInGame(true);
-		UMGPhoneWidget->SetComponentTickEnabled(false);
-		UMGPhoneWidget->SetVisibility(true);
-	}
-	else
-	{
-		UMGPhoneWidget->Activate();
-		UMGPhoneWidget->SetHiddenInGame(false);
-		UMGPhoneWidget->SetComponentTickEnabled(true);
-		UMGPhoneWidget->SetVisibility(false);
-	}
+	if (Screen == CurrentScreen)
+		return;
+
+	//ScreenWidgetComponents[CurrentScreen]->SetComponentTickEnabled(false);
+	ScreenWidgetComponents[CurrentScreen]->SetVisibility(false);
+	ScreenWidgets[CurrentScreen]->Unselect();
+
+	CurrentScreen = Screen;
+	
+	//ScreenWidgetComponents[CurrentScreen]->SetComponentTickEnabled(true);
+	ScreenWidgetComponents[CurrentScreen]->SetVisibility(true);
+
+	ScreenWidgets[CurrentScreen]->HoverApp();
 }
 
 void ASpookyPhoneActor::ShowCamera()
 {
-	TogglePhoneUI();
-	Camera->SetActorHiddenInGame(true);
+	GoToScreen(CAMERA);
+	Camera->SetActorTickEnabled(true);
 	ScreenMesh->SetMaterial(0, Camera->cameraMaterial);
 	//Camera->GetCaptureComponent2D()->TextureTarget
 }
 
 void ASpookyPhoneActor::NavigateByDirection(ENavigationDirection Direction)
 {
-	UMGPhoneUI->SelectNextApp(Direction);
+	ScreenWidgets[CurrentScreen]->HoverNextApp(Direction);
 }
 
 void ASpookyPhoneActor::Select()
 {
-	UMGPhoneUI->Select();
+	ScreenWidgets[CurrentScreen]->Select();
+}
+
+void ASpookyPhoneActor::GoHome()
+{
+	if (CurrentScreen == CAMERA)
+	{
+		Camera->SetActorTickEnabled(false);
+		ScreenMesh->SetMaterial(0, ScreenMaterial);
+	}
+
+	GoToScreen(HOME);
 }
