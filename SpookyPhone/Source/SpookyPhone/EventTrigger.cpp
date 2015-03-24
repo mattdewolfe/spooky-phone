@@ -24,6 +24,11 @@ void AEventTrigger::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
+	SetEventFlag(eventFlag);
+	SetStartEventFlag(startEventFlag);
+	SetPauseEventFlag(pauseEventFlag);
+	SetEndEventFlag(endEventFlag);
+
 	ASpookyGameMode* GameMode = GetWorld()->GetAuthGameMode<ASpookyGameMode>();
 
 	if (GameMode)
@@ -65,32 +70,46 @@ void AEventTrigger::EditorApplyScale(const FVector& DeltaScale, const FVector* P
 	}
 }
 
-void AEventTrigger::Start()
+void AEventTrigger::Start(bool shouldStartAlone)
 {
 	// Begin running this event object and register for update until it ends
 	// Allow any concurrent event object to keep running but others will be unregistered from EventManager
+#if WITH_EDITOR
 	GEngine->AddOnScreenDebugMessage(1003, 5, FColor::Blue, FString::Printf(TEXT("AEventTrigger event started")));
+#endif
 
 	if (Manager)
 	{
-		Manager->AddToUpdateList(this);
+		shouldStartAlone ? Manager->AddToUpdateList(this) : Manager->StartEvent(this);
+
+		EventState = EEventState::STARTED;
 	}
 }
 
-void AEventTrigger::EventUpdate_Implementation()
+bool AEventTrigger::TogglePause(bool shouldTogglePauseAlone)
 {
-	GEngine->AddOnScreenDebugMessage(1004, 5, FColor::Yellow, TEXT("AEventTrigger ticking"));
+	if (!shouldTogglePauseAlone)
+		Manager->EventTogglePause(this);
 
-	//if (EventUpdateFunction != NULL)
-	//{
-	//	ProcessEvent(EventUpdateFunction, nullptr);
-	//}
+	switch (EventState)
+	{
+	case EEventState::STARTED:
+		EventState = EEventState::PAUSED;
+		break;
+	case EEventState::PAUSED:
+		EventState = EEventState::STARTED;
+		break;
+	}
+
+	return EventState == EEventState::PAUSED;
 }
 
-void AEventTrigger::End()
+void AEventTrigger::End(bool shouldEndAlone)
 {
 	if (Manager)
 	{
-		Manager->RemoveFromUpdateList(this);
+		shouldEndAlone ? Manager->RemoveFromUpdateList(this) : Manager->EndEvent(this);
+
+		SetEventState(EEventState::ENDED);
 	}
 }

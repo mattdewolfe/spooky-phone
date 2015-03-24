@@ -14,17 +14,17 @@ void IEventObjectInterface::Init()
 
 }
 
-void IEventObjectInterface::Start()
+void IEventObjectInterface::Start(bool shouldStartAlone)
 {
 
 }
 
-void IEventObjectInterface::EventUpdate()
+bool IEventObjectInterface::TogglePause(bool shouldTogglePauseAlone)
 {
-
+	return EventState == EEventState::PAUSED;
 }
 
-void IEventObjectInterface::End()
+void IEventObjectInterface::End(bool shouldEndAlone)
 {
 
 }

@@ -32,12 +32,22 @@ public:
 
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable, Category = Event)
-	virtual void Start() override;
+	virtual void Start(bool shouldStartAlone) override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Event)
-	void EventUpdate() override;
+	virtual bool TogglePause(bool shouldTogglePauseAlone) override;
 
-	UFUNCTION(BlueprintCallable, Category = Event)
-	virtual void End() override;
+	virtual void End(bool shouldEndAlone) override;
+
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 eventFlag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 startEventFlag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 pauseEventFlag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 endEventFlag;
 };
