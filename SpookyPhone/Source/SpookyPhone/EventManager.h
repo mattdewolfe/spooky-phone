@@ -30,11 +30,19 @@ public:
 
 	void Init();
 
+	void StartEvent(IEventObjectInterface* EventObject);
+
+	void EventTogglePause(IEventObjectInterface* EventObject);
+
+	void EndEvent(IEventObjectInterface* EventObject);
+
 	void RegisterEventObject(IEventObjectInterface* EventObject);
 
-	void AddToUpdateList(IEventObjectInterface* EventObject);
+	FORCEINLINE void AddToUpdateList(IEventObjectInterface* EventObject);
 
-	void RemoveFromUpdateList(IEventObjectInterface* EventObject);
+	FORCEINLINE void RemoveFromUpdateList(IEventObjectInterface* EventObject);
+
+	FORCEINLINE void RemoveAllFromUpdateList(int32 key);
 
 	virtual void EventTick(float DeltaSeconds);
 
@@ -44,4 +52,8 @@ protected:
 	TArray<IEventObjectInterface*> UpdateList;
 
 	TArray<IEventObjectInterface*> PauseList;
+
+	TMultiMap<int32, IEventObjectInterface*> EventMap;
+
+	TMultiMap<int32, IEventObjectInterface*> UpdateMap;
 };
