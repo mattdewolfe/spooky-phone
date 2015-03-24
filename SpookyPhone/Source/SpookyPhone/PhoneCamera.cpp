@@ -140,7 +140,3 @@ bool APhoneCamera::DeletePicture(int _index)
 #pragma endregion
 
 //KW 
-
-
-
-
