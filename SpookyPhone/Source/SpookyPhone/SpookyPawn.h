@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include "EventObjectInterface.h"
+#include "SpookyGameMode.h"
+#include "EventManager.h"
 #include "GameFramework/Pawn.h"
 #include "SpookyPhoneActor.h"
 #include "SpookyPawn.generated.h"
@@ -10,7 +13,7 @@
  * 
  */
 UCLASS()
-class SPOOKYPHONE_API ASpookyPawn : public APawn
+class SPOOKYPHONE_API ASpookyPawn : public APawn, public IEventObjectInterface
 {
 	GENERATED_BODY()
 
@@ -27,10 +30,19 @@ public:
 	void MoveForward(float _value);
 	void Turn(float _value);
 
+	virtual void PostInitializeComponents() override;
+
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
 	virtual void Tick(float _DeltaTime);
 
+	virtual void Start(bool shouldStartAlone) override;
+
+	virtual bool TogglePause(bool shouldTogglePauseAlone) override;
+
+	virtual void End(bool shouldEndAlone) override;
+
+public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Movement)
 	UMovementComponent* MovementComponent;
 
@@ -42,6 +54,18 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	ASpookyPhoneActor* Phone;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 eventFlag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 startEventFlag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 pauseEventFlag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
+	int32 endEventFlag;
 
 private:
 	void TogglePhone();
