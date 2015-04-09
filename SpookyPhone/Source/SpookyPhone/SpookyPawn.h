@@ -5,15 +5,16 @@
 #include "EventObjectInterface.h"
 #include "SpookyGameMode.h"
 #include "EventManager.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "SpookyPhoneActor.h"
+#include "SpookyPlayerController.h"
 #include "SpookyPawn.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SPOOKYPHONE_API ASpookyPawn : public APawn, public IEventObjectInterface
+class SPOOKYPHONE_API ASpookyPawn : public ACharacter, public IEventObjectInterface
 {
 	GENERATED_BODY()
 
@@ -43,8 +44,8 @@ public:
 	virtual void End(bool shouldEndAlone) override;
 
 public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Movement)
-	UMovementComponent* MovementComponent;
+//	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Movement)
+//	UMovementComponent* MovementComponent;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
 	UCapsuleComponent* ColliderComponent;
@@ -68,6 +69,9 @@ public:
 	int32 endEventFlag;
 
 private:
+	// Instance of custom player controller for accessing properties
+	ASpookyPlayerController* playerController;
+
 	void TogglePhone();
 	
 	void NavigatePhoneUp();

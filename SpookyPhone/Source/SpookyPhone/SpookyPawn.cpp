@@ -7,11 +7,11 @@
 ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
 	: Super(_ObjectInitializer)
 {
-	ColliderComponent = _ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("ColliderComponent"));
-	ColliderComponent->SetCapsuleSize(7.0f, 7.0f);
-	RootComponent = ColliderComponent;
+//	ColliderComponent = _ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("ColliderComponent"));
+//	ColliderComponent->SetCapsuleSize(7.0f, 7.0f);
+//	RootComponent = ColliderComponent;
 
-	MovementComponent = _ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));
+//	MovementComponent = _ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));
 
 	PhoneClass = ASpookyPawn::StaticClass();
 	ConstructorHelpers::FObjectFinder<UBlueprint> PhoneBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_SpookyPhone.BP_SpookyPhone'"));
@@ -101,6 +101,10 @@ void ASpookyPawn::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Super::BeginPlay();
+	// Store a reference to our player controller
+	playerController = Cast<ASpookyPlayerController>(Controller);
+
 	// get a reference to the world
 	UWorld* World = GetWorld();
 
@@ -144,7 +148,7 @@ void ASpookyPawn::CalculateAndApplyMovement()
 	else if (abs(rightWheelMotion) >= 0.1f && abs(leftWheelMotion) >= 0.1f)
 	{
 		AddControllerYawInput((leftWheelMotion + rightWheelMotion)*0.2);
-		AddMovementInput(GetControlRotation().Vector(), (leftWheelMotion - rightWheelMotion)*0.5);
+		AddMovementInput(playerController->GetViewRotation().Vector(), (leftWheelMotion - rightWheelMotion)*0.5);
 	}
 }
 
