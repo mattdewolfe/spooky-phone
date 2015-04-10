@@ -33,69 +33,7 @@ ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
 void ASpookyPawn::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-
-	SetEventFlag(eventFlag);
-	SetStartEventFlag(startEventFlag);
-	SetPauseEventFlag(pauseEventFlag);
-	SetEndEventFlag(endEventFlag);
-
-	ASpookyGameMode* GameMode = GetWorld()->GetAuthGameMode<ASpookyGameMode>();
-
-	if (GameMode)
-	{
-		AEventManager* Manager = GameMode->GetEventManager();
-		if (Manager)
-		{
-			Manager->RegisterEventObject(this);
-		}
-	}
 }
-
-#pragma region Event Functions
-void ASpookyPawn::Start(bool shouldStartAlone)
-{
-	// Begin running this event object and register for update until it ends
-	// Allow any concurrent event object to keep running but others will be unregistered from EventManager
-#if WITH_EDITOR
-	GEngine->AddOnScreenDebugMessage(1003, 5, FColor::Blue, FString::Printf(TEXT("AEventTrigger event started")));
-#endif
-
-	if (Manager)
-	{
-		shouldStartAlone ? Manager->AddToUpdateList(this) : Manager->StartEvent(this);
-
-		EventState = EEventState::STARTED;
-	}
-}
-
-bool ASpookyPawn::TogglePause(bool shouldTogglePauseAlone)
-{
-	if (!shouldTogglePauseAlone)
-		Manager->EventTogglePause(this);
-
-	switch (EventState)
-	{
-	case EEventState::STARTED:
-		EventState = EEventState::PAUSED;
-		break;
-	case EEventState::PAUSED:
-		EventState = EEventState::STARTED;
-		break;
-	}
-
-	return EventState == EEventState::PAUSED;
-}
-
-void ASpookyPawn::End(bool shouldEndAlone)
-{
-	if (Manager)
-	{
-		shouldEndAlone ? Manager->RemoveFromUpdateList(this) : Manager->EndEvent(this);
-
-		SetEventState(EEventState::ENDED);
-	}
-}
-#pragma endregion
 
 void ASpookyPawn::BeginPlay()
 {

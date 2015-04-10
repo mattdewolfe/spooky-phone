@@ -14,7 +14,7 @@
  * 
  */
 UCLASS()
-class SPOOKYPHONE_API ASpookyPawn : public ACharacter, public IEventObjectInterface
+class SPOOKYPHONE_API ASpookyPawn : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -37,12 +37,6 @@ public:
 	virtual void SetupPlayerInputComponent(UInputComponent * _InputComponent) override;
 	virtual void Tick(float _DeltaTime);
 
-	virtual void Start(bool shouldStartAlone) override;
-
-	virtual bool TogglePause(bool shouldTogglePauseAlone) override;
-
-	virtual void End(bool shouldEndAlone) override;
-
 public:
 //	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Movement)
 //	UMovementComponent* MovementComponent;
@@ -55,18 +49,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	ASpookyPhoneActor* Phone;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
-	int32 eventFlag;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
-	int32 startEventFlag;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
-	int32 pauseEventFlag;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Event)
-	int32 endEventFlag;
 
 private:
 	// Instance of custom player controller for accessing properties
