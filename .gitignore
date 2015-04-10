@@ -20,4 +20,7 @@ SpookyPhone/Saved/
 *.manifest
 *.response
 
+/SpookyPhone/Content/SplatterDecals/
+/SpookyPhone/Content/UrbanPropsPack/
+/SpookyPhone/Content/TheBunkerPack/
 
