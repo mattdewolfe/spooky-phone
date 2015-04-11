@@ -2,6 +2,7 @@
 
 #include "SpookyPhone.h"
 #include "SpookyPawn.h"
+#include "HideableActor.h"
 #include "SpookyPlayerController.h"
 
 ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
@@ -171,4 +172,25 @@ void ASpookyPawn::Use()
 {
 	if (bUsingPhone)
 		Phone->Select();
+}
+
+void ASpookyPawn::SetHideableGroupVisibility(bool newVisibility, uint8 groupToToggle)
+{
+	//for (TActorIterator<AHideableActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	//{
+	//	//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, ActorItr->GetName());
+	//	if (ActorItr->visibilityGroup == groupToToggle)
+	//	{
+	//		(*ActorItr)->SetActorHiddenInGame(newVisibility);
+	//		//Cast<AActor*>(ActorItr)->SetActorHiddenInGame(newVisibility);
+	//	}
+	//}
+
+	for (TActorIterator<AHideableActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		if (ActorItr->visibilityGroup == groupToToggle)
+		{
+			ActorItr->SetActorHiddenInGame(newVisibility);
+		}
+	}
 }

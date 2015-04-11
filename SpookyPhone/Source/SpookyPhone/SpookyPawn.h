@@ -50,6 +50,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	ASpookyPhoneActor* Phone;
 
+	UFUNCTION(BlueprintCallable, Category = Visibility)
+	void SetHideableGroupVisibility(bool newVisibility, uint8 groupToToggle);
+
 private:
 	// Instance of custom player controller for accessing properties
 	ASpookyPlayerController* playerController;
@@ -60,7 +63,7 @@ private:
 	void NavigatePhoneDown();
 	void NavigatePhoneLeft();
 	void NavigatePhoneRight();
-	void Use();
+	void Use();	
 
 	bool bUsingPhone;
 
