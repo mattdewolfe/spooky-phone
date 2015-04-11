@@ -12,6 +12,7 @@
 SpookyPhone/Binaries/
 SpookyPhone/DerivedDataCache/
 SpookyPhone/Intermediate/Build/
+SpookyPhone/Intermediate/ProjectFiles/
 SpookyPhone/Saved/
 
 *.bin
@@ -19,6 +20,7 @@ SpookyPhone/Saved/
 *.lib
 *.manifest
 *.response
+*.sln
 
 /SpookyPhone/Content/SplatterDecals/
 /SpookyPhone/Content/UrbanPropsPack/
