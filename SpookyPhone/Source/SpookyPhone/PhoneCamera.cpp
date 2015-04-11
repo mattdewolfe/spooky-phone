@@ -3,6 +3,17 @@
 
 #pragma region init/shutdown
 
+APhoneCamera::APhoneCamera(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+{
+	ConstructorHelpers::FObjectFinder<UMaterial> camMat(TEXT("Material'/Game/Materials/PhoneCamera_Mat'"));
+	cameraMaterial = camMat.Object;
+
+	ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> target(TEXT("Material'/Game/Textures/PhoneCamera'"));
+	renderTarget = target.Object;
+
+	this->GetCaptureComponent2D()->TextureTarget = renderTarget;
+}
+
 void APhoneCamera::BeginPlay()
 {
 	//default to normal filter.

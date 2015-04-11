@@ -45,6 +45,9 @@ private:
 protected:
 	//
 public:
+	//constructor.
+	APhoneCamera(const FObjectInitializer& ObjectInitializer);
+
 	//keeps track of filters that can be applied to camera as needed; affects the playback/tint or whatnot.d
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
 	TEnumAsByte<FilterType> currentFilter;
@@ -71,4 +74,7 @@ public:
 	bool DeletePicture(int32 _index);
 	UFUNCTION(BlueprintCallable, Category = TEST)
 	bool DeleteAllPictures();
+
+	UMaterial* cameraMaterial;
+	UTextureRenderTarget2D* renderTarget;
 };
