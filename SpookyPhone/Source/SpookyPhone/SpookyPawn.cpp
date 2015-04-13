@@ -50,7 +50,7 @@ void ASpookyPawn::BeginPlay()
 	if (World)
 	{
 		// spawn the phone near the pawn
-		Phone = GetWorld()->SpawnActor<ASpookyPhoneActor>(PhoneClass, FVector(90.f, 0.f, 50.f), FRotator(0.f, 90.f, 90.f));
+		Phone = GetWorld()->SpawnActor<ASpookyPhoneActor>(PhoneClass, FVector(90.f, 0.f, 70.f), FRotator(0.f, 90.f, 90.f));
 		Phone->AttachRootComponentToActor(this, NAME_None, EAttachLocation::KeepRelativeOffset);
 	}
 }

@@ -3,16 +3,20 @@
 #pragma once
 
 #include "Widgets/UIWidget.h"
-#include "CameraAppWidget.generated.h"
+#include "SpookyPawn.h"
+#include "AppWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SPOOKYPHONE_API UCameraAppWidget : public UUIWidget
+class SPOOKYPHONE_API UAppWidget : public UUIWidget
 {
 	GENERATED_BODY()
 	
 public:
 	virtual void OnAppClicked();
+
+	UPROPERTY(EditAnywhere, Category = App)
+	TEnumAsByte<EScreens> AppScreen;
 };

@@ -51,7 +51,7 @@ ASpookyPhoneActor::ASpookyPhoneActor(const FObjectInitializer& ObjectInitializer
 	ScreenMesh->AttachTo(RootComponent);
 	UMGPhoneHomeWidget->AttachTo(RootComponent);
 
-	CurrentScreen = HOME;
+	CurrentScreen = EScreens::HOME;
 	bIsHidden = false;
 }
 
@@ -71,7 +71,7 @@ void ASpookyPhoneActor::BeginPlay()
 
 		// Setup the home button
 		UMGPhoneHomeWidget->Activate();
-		UMGHomeButton = Cast<UHomeButtonWidget>(UMGPhoneHomeWidget->GetUserWidgetObject());
+		UMGHomeButton = Cast<UUIWidget>(UMGPhoneHomeWidget->GetUserWidgetObject());
 
 		// Spawn all of the screens
 		PhoneUI = GetWorld()->SpawnActor<AActor>(PhoneWidgetBlueprint, FVector::ZeroVector, FRotator::ZeroRotator);
@@ -118,36 +118,28 @@ void ASpookyPhoneActor::TogglePhone()
 
 void ASpookyPhoneActor::GoToScreen(EScreens Screen)
 {
-	/*if (UMGPhoneScreenWidget->IsActive())
-	{
-		UMGPhoneScreen->SetVisibility(ESlateVisibility::Hidden);
-		UMGPhoneScreenWidget->Deactivate();
-		UMGPhoneScreenWidget->SetHiddenInGame(true);
-		UMGPhoneScreenWidget->SetComponentTickEnabled(false);
-		UMGPhoneScreenWidget->SetVisibility(true);
-	}*/
-
 	if (Screen == CurrentScreen)
 		return;
 
-	//ScreenWidgetComponents[CurrentScreen]->SetComponentTickEnabled(false);
+	if (CurrentScreen == EScreens::CAMERA)
+	{
+		Camera->SetActorTickEnabled(false);
+		ScreenMesh->SetMaterial(0, ScreenMaterial);
+	}
+	else if (Screen == EScreens::CAMERA)
+	{
+		Camera->SetActorTickEnabled(true);
+		ScreenMesh->SetMaterial(0, Camera->cameraMaterial);
+	}
+
 	ScreenWidgetComponents[CurrentScreen]->SetVisibility(false);
 	ScreenWidgets[CurrentScreen]->Unselect();
 
 	CurrentScreen = Screen;
 	
-	//ScreenWidgetComponents[CurrentScreen]->SetComponentTickEnabled(true);
 	ScreenWidgetComponents[CurrentScreen]->SetVisibility(true);
 
 	ScreenWidgets[CurrentScreen]->HoverApp();
-}
-
-void ASpookyPhoneActor::ShowCamera()
-{
-	GoToScreen(CAMERA);
-	Camera->SetActorTickEnabled(true);
-	ScreenMesh->SetMaterial(0, Camera->cameraMaterial);
-	//Camera->GetCaptureComponent2D()->TextureTarget
 }
 
 void ASpookyPhoneActor::NavigateByDirection(ENavigationDirection Direction)
@@ -158,15 +150,4 @@ void ASpookyPhoneActor::NavigateByDirection(ENavigationDirection Direction)
 void ASpookyPhoneActor::Select()
 {
 	ScreenWidgets[CurrentScreen]->Select();
-}
-
-void ASpookyPhoneActor::GoHome()
-{
-	if (CurrentScreen == CAMERA)
-	{
-		Camera->SetActorTickEnabled(false);
-		ScreenMesh->SetMaterial(0, ScreenMaterial);
-	}
-
-	GoToScreen(HOME);
 }

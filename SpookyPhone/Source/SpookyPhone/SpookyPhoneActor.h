@@ -13,7 +13,8 @@ UENUM()
 enum EScreens
 {
 	HOME,
-	CAMERA
+	CAMERA,
+	PHONE
 };
 
 UCLASS()
@@ -26,9 +27,6 @@ public:
 
 	void TogglePhone();
 	void GoToScreen(EScreens Screen);
-
-	void ShowCamera();
-	void GoHome();
 
 	void NavigateByDirection(ENavigationDirection Direction);
 	void Select();
@@ -64,7 +62,7 @@ private:
 	UWidgetComponent* UMGPhoneHomeWidget;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = UMG)
-	UHomeButtonWidget* UMGHomeButton;
+	UUIWidget* UMGHomeButton;
 
 
 	//UPROPERTY(VisibleDefaultsOnly, Category = UMG)
