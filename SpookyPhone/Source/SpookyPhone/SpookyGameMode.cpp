@@ -19,26 +19,11 @@ ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& _ObjectInitializer)
 	PlayerControllerClass = ASpookyPlayerController::StaticClass();
 }
 
-void ASpookyGameMode::PreInitializeComponents()
+void ASpookyGameMode::PostInitializeComponents()
 {
-	Super::PreInitializeComponents();
-}
+	Super::PostInitializeComponents();
 
-AEventManager* ASpookyGameMode::InitializeEventManager()
-{
-	AEventManager* InstantiatedManager = GetWorld()->SpawnActor<AEventManager>();
-
-	return InstantiatedManager;
-}
-
-AEventManager* ASpookyGameMode::GetEventManager()
-{
-	if (!Manager)
-	{
-		Manager = InitializeEventManager();
-	}
-
-	return Manager;
+	Manager = UEventBlueprintFunctionLibrary::GetEventManagerInst(GetWorld());
 }
 
 void ASpookyGameMode::Tick(float DeltaSeconds)

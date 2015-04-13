@@ -2,10 +2,12 @@
 
 #pragma once
 
-#include "EventObjectInterface.h"
 #include "Engine.h"
 #include "GameFramework/Actor.h"
 #include "EventManager.generated.h"
+
+class IEventObjectInterface;
+class UEventBlueprintFunctionLibrary;
 
 /**
 * EventManager contains event objects and manages and processes events sequentially

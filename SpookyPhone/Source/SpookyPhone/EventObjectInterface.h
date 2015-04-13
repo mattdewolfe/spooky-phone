@@ -5,6 +5,7 @@
 #include "EventObjectInterface.generated.h"
 
 class AEventManager;
+class UEventBlueprintFunctionLibrary;
 
 UENUM()
 enum class EEventState : uint8
