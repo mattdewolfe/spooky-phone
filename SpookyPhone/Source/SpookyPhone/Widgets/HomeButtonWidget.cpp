@@ -6,9 +6,9 @@
 
 void UHomeButtonWidget::OnAppClicked()
 {
-	ASpookyPawn* SPawn = Cast<ASpookyPawn>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	/*ASpookyPawn* SPawn = Cast<ASpookyPawn>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	if (SPawn)
 	{
 		SPawn->Phone->GoHome();
-	}
+	}*/
 }
