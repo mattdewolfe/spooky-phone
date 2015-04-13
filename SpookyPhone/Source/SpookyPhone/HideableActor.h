@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Engine/StaticMeshActor.h"
 #include "HideableActor.generated.h"
 
 UCLASS()
@@ -12,7 +13,7 @@ class SPOOKYPHONE_API AHideableActor : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	AHideableActor();
+	AHideableActor(const FObjectInitializer& _init);
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -22,9 +23,15 @@ public:
 
 	void SetVisibility(bool _isVisible);
 
+	UStaticMesh* mesh;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Rendering)
+	UStaticMeshComponent* renderPlane;
+
 	// The group this objects belongs to. The visibility of all objects in the same group are toggled together. 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Visibility)
-		uint8 visibilityGroup;
+	uint8 visibilityGroup;
+
 private:
 	bool isVisible;	
 };

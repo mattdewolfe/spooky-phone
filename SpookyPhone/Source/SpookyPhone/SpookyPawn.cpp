@@ -75,19 +75,19 @@ void ASpookyPawn::CalculateAndApplyMovement()
 	if (abs(leftWheelMotion) <= 0.1f && rightWheelMotion != 0.0f)
 	{
 		// Add rights negative yaw motion
-		AddControllerYawInput(rightWheelMotion*0.25);
+		AddControllerYawInput(rightWheelMotion*0.15);
 	}
 	// If left wheel is moving and right is not
 	else if (leftWheelMotion != 0.0f && abs(rightWheelMotion) <= 0.1f)
 	{
 		// Add lefts yaw motion
-		AddControllerYawInput(leftWheelMotion*0.25);
+		AddControllerYawInput(leftWheelMotion*0.15);
 	}
 	// If both are non zero, combine for yaw and movement
 	else if (abs(rightWheelMotion) >= 0.1f && abs(leftWheelMotion) >= 0.1f)
 	{
 		AddControllerYawInput((leftWheelMotion + rightWheelMotion)*0.2);
-		AddMovementInput(playerController->GetViewRotation().Vector(), (leftWheelMotion - rightWheelMotion)*0.5);
+		AddMovementInput(playerController->GetViewRotation().Vector(), (leftWheelMotion - rightWheelMotion)*0.25);
 	}
 }
 
@@ -176,16 +176,6 @@ void ASpookyPawn::Use()
 
 void ASpookyPawn::SetHideableGroupVisibility(bool newVisibility, uint8 groupToToggle)
 {
-	//for (TActorIterator<AHideableActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	//{
-	//	//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, ActorItr->GetName());
-	//	if (ActorItr->visibilityGroup == groupToToggle)
-	//	{
-	//		(*ActorItr)->SetActorHiddenInGame(newVisibility);
-	//		//Cast<AActor*>(ActorItr)->SetActorHiddenInGame(newVisibility);
-	//	}
-	//}
-
 	for (TActorIterator<AHideableActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
 		if (ActorItr->visibilityGroup == groupToToggle)

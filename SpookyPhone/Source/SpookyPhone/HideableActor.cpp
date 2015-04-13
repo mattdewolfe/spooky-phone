@@ -5,11 +5,19 @@
 
 
 // Sets default values
-AHideableActor::AHideableActor()
+AHideableActor::AHideableActor(const FObjectInitializer& _init)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//Asset, Reference Obtained Via Right Click in Editor
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshOb(TEXT("StaticMesh'/Game/SplatterDecals/Meshes/100_unit_plane.100_unit_plane'"));
+
+	mesh = StaticMeshOb.Object;
+
+	renderPlane = _init.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("RenderMesh"));
+	renderPlane->SetStaticMesh(mesh);
+	RootComponent = renderPlane;
 }
 
 // Called when the game starts or when spawned

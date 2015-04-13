@@ -6,7 +6,10 @@
 
 // Sets default values
 ASPInGameClock::ASPInGameClock(const FObjectInitializer& _init) :
-timeToPlay(300)
+timeToPlay(300),
+currentMinuteTime(99),
+currentPower10SecondTime(11),
+currentSecondTime(11)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -16,7 +19,7 @@ timeToPlay(300)
 
 	baseMesh = StaticMeshOb.Object;
 
-	//Create
+	 //Create
 	minutesSM = _init.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("ClockMinuteMesh"));
 	semicolonSM = _init.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("ClockSemiColonMesh"));
 	powerOf10SecondsSM = _init.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("ClockPower10Mesh"));
@@ -28,9 +31,8 @@ timeToPlay(300)
 	powerOf10SecondsSM->SetStaticMesh(baseMesh);
 	secondsSM->SetStaticMesh(baseMesh);
 
-	minutesSM->SetWorldScale3D(FVector(0.45, 0.2, 0.2));
+	minutesSM->SetWorldScale3D(FVector(0.2, 0.4, 0.4));
 
-	//Deferred Attachment (Ty Nick W.! Actual attach gets done after blueprint stuff)
 	RootComponent = minutesSM;
 	semicolonSM->AttachParent = minutesSM;
 	powerOf10SecondsSM->AttachParent = minutesSM;
@@ -50,6 +52,7 @@ void ASPInGameClock::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 	timeRemaining -= DeltaTime;
+	UpdateClock();
 }
 
 void ASPInGameClock::UpdateClock()
@@ -80,7 +83,7 @@ void ASPInGameClock::SetMinutes(uint32 _val)
 	{
 		currentMinuteTime = _val;
 		UMaterialInterface* tempMat = Cast<UMaterialInterface>(clockFrames[currentMinuteTime]);
-		secondsSM->SetMaterial(0, tempMat);
+		minutesSM->SetMaterial(0, tempMat);
 	}
 }
 
@@ -90,6 +93,6 @@ void ASPInGameClock::SetPower10Seconds(uint32 _val)
 	{
 		currentPower10SecondTime = _val;
 		UMaterialInterface* tempMat = Cast<UMaterialInterface>(clockFrames[currentPower10SecondTime]);
-		secondsSM->SetMaterial(0, tempMat);
+		powerOf10SecondsSM->SetMaterial(0, tempMat);
 	}
 }

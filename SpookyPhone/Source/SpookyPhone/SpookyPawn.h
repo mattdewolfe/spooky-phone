@@ -7,6 +7,7 @@
 #include "EventManager.h"
 #include "GameFramework/Character.h"
 #include "SpookyPhoneActor.h"
+#include "Engine/StaticMeshActor.h"
 #include "SpookyPlayerController.h"
 #include "SpookyPawn.generated.h"
 
@@ -38,8 +39,8 @@ public:
 	virtual void Tick(float _DeltaTime);
 
 public:
-//	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Movement)
-//	UMovementComponent* MovementComponent;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Rendering)
+	UStaticMeshComponent* ChairMesh;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
 	UCapsuleComponent* ColliderComponent;
