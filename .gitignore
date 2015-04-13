@@ -21,8 +21,11 @@ SpookyPhone/Saved/
 *.manifest
 *.response
 *.sln
+*.wav
 
+# Content specific folders, not to be tracked in the repo!
 /SpookyPhone/Content/SplatterDecals/
 /SpookyPhone/Content/UrbanPropsPack/
 /SpookyPhone/Content/TheBunkerPack/
-
+/SpookyPhone/Content/HorrorMusicPack/
+/SpookyPhone/Content/Sound/
