@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "EventManager.h"
+#include "EventBlueprintFunctionLibrary.h"
 #include "GameFramework/GameMode.h"
 #include "SpookyGameMode.generated.h"
 
@@ -17,7 +17,7 @@ class SPOOKYPHONE_API ASpookyGameMode : public AGameMode
 public:
 	ASpookyGameMode(const FObjectInitializer& _ObjectInitializer);
 
-	virtual void PreInitializeComponents() override;
+	virtual void PostInitializeComponents() override;
 
 	AEventManager* GetEventManager();
 
@@ -26,7 +26,4 @@ public:
 protected:
 	//TSubclassOf<AEventManager> Manager;
 	AEventManager* Manager;
-
-protected:
-	AEventManager* InitializeEventManager();
 };

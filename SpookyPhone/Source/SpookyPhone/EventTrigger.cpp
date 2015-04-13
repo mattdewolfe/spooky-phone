@@ -29,15 +29,10 @@ void AEventTrigger::PostInitializeComponents()
 	SetPauseEventFlag(pauseEventFlag);
 	SetEndEventFlag(endEventFlag);
 
-	ASpookyGameMode* GameMode = GetWorld()->GetAuthGameMode<ASpookyGameMode>();
-
-	if (GameMode)
+	Manager = UEventBlueprintFunctionLibrary::GetEventManagerInst(GetWorld());
+	if (Manager)
 	{
-		AEventManager* Manager = GameMode->GetEventManager();
-		if (Manager)
-		{
-			Manager->RegisterEventObject(this);
-		}
+		Manager->RegisterEventObject(this);
 	}
 }
 
@@ -78,38 +73,44 @@ void AEventTrigger::Start(bool shouldStartAlone)
 	GEngine->AddOnScreenDebugMessage(1003, 5, FColor::Blue, FString::Printf(TEXT("AEventTrigger event started")));
 #endif
 
-	if (Manager)
-	{
-		shouldStartAlone ? Manager->AddToUpdateList(this) : Manager->StartEvent(this);
+	//if (Manager)
+	//{
+	//	shouldStartAlone ? Manager->AddToUpdateList(this) : Manager->StartEvent(this);
 
-		EventState = EEventState::STARTED;
-	}
+	//	EventState = EEventState::STARTED;
+	//}
+
+	IEventObjectInterface::Start(shouldStartAlone);
 }
 
 bool AEventTrigger::TogglePause(bool shouldTogglePauseAlone)
 {
-	if (!shouldTogglePauseAlone)
-		Manager->EventTogglePause(this);
+	//if (!shouldTogglePauseAlone)
+	//	Manager->EventTogglePause(this);
 
-	switch (EventState)
-	{
-	case EEventState::STARTED:
-		EventState = EEventState::PAUSED;
-		break;
-	case EEventState::PAUSED:
-		EventState = EEventState::STARTED;
-		break;
-	}
+	//switch (EventState)
+	//{
+	//case EEventState::STARTED:
+	//	EventState = EEventState::PAUSED;
+	//	break;
+	//case EEventState::PAUSED:
+	//	EventState = EEventState::STARTED;
+	//	break;
+	//}
 
-	return EventState == EEventState::PAUSED;
+	//return EventState == EEventState::PAUSED;
+
+	return IEventObjectInterface::TogglePause(shouldTogglePauseAlone);
 }
 
 void AEventTrigger::End(bool shouldEndAlone)
 {
-	if (Manager)
-	{
-		shouldEndAlone ? Manager->RemoveFromUpdateList(this) : Manager->EndEvent(this);
+	//if (Manager)
+	//{
+	//	shouldEndAlone ? Manager->RemoveFromUpdateList(this) : Manager->EndEvent(this);
 
-		SetEventState(EEventState::ENDED);
-	}
+	//	SetEventState(EEventState::ENDED);
+	//}
+
+	IEventObjectInterface::End(shouldEndAlone);
 }

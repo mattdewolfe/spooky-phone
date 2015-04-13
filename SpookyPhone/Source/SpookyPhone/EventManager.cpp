@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SpookyPhone.h"
+#include "EventBlueprintFunctionLibrary.h"
 #include "EventManager.h"
 
 AEventManager::AEventManager(const FObjectInitializer& ObjectInitializer)
@@ -74,134 +75,130 @@ void AEventManager::EventTick(float DeltaSeconds)
 	//	(*Itr)->Execute_EventUpdate(t);
 	//}
 
-	for (auto Itr(UpdateMap.CreateIterator()); Itr; ++Itr)
-	{
-		IEventObjectInterface* eventObject = Itr.Value();
-
-		auto t = Cast<UObject>(eventObject);
-
-		if (eventObject && t && eventObject->GetEventState() != EEventState::PAUSED)
-		{
-			eventObject->Execute_EventUpdate(t);
-		}
-	}
+	UEventBlueprintFunctionLibrary::UpdateEventEventObjectMap(UpdateMap);
 }
 
 void AEventManager::StartEvent(IEventObjectInterface* EventObject)
 {
-	AddToUpdateList(EventObject);
+//	AddToUpdateList(EventObject);
+//
+//	int32 StartEventFlag = EventObject->GetStartEventFlag();
+//
+//	if (StartEventFlag > 0)
+//	{
+//		//Tell Manager to start other flagged events same as StartEventFlag
+//		int32 tempBitMask = 1;
+//
+//		while (tempBitMask <= StartEventFlag)
+//		{
+//			//If bit flag at specific location is on
+//			if (StartEventFlag & tempBitMask)
+//			{
+//#if WITH_EDITOR
+//				GEngine->AddOnScreenDebugMessage(1111, 5, FColor::White, TEXT("Starting Other Events With Flag"));
+//#endif
+//				//Iterates through all values associated with this specific bit flag
+//				for (auto Itr(EventMap.CreateKeyIterator(StartEventFlag)); Itr; ++Itr)
+//				{
+//					IEventObjectInterface* eventObject = Itr.Value();
+//					if (eventObject)
+//					{
+//						eventObject->Start(true);
+//					}
+//				}
+//			}
+//
+//			if (tempBitMask == StartEventFlag)
+//			{
+//				break;
+//			}
+//
+//			tempBitMask <<= 1;
+//		}
+//	}
 
-	int32 StartEventFlag = EventObject->GetStartEventFlag();
-
-	if (StartEventFlag > 0)
-	{
-		//Tell Manager to start other flagged events same as StartEventFlag
-		int32 tempBitMask = 1;
-
-		while (tempBitMask <= StartEventFlag)
-		{
-			//If bit flag at specific location is on
-			if (StartEventFlag & tempBitMask)
-			{
-#if WITH_EDITOR
-				GEngine->AddOnScreenDebugMessage(1111, 5, FColor::White, TEXT("Starting Other Events With Flag"));
-#endif
-				//Iterates through all values associated with this specific bit flag
-				for (auto Itr(EventMap.CreateKeyIterator(StartEventFlag)); Itr; ++Itr)
-				{
-					IEventObjectInterface* eventObject = Itr.Value();
-					if (eventObject)
-					{
-						eventObject->Start(true);
-					}
-				}
-			}
-
-			if (tempBitMask == StartEventFlag)
-			{
-				break;
-			}
-
-			tempBitMask <<= 1;
-		}
-	}
+	UEventBlueprintFunctionLibrary::StartOtherEventObjects(this, EventObject, EventMap);
 }
 
 void AEventManager::EventTogglePause(IEventObjectInterface* EventObject)
 {
-	int32 PauseEventFlag = EventObject->GetPauseEventFlag();
+//	int32 PauseEventFlag = EventObject->GetPauseEventFlag();
+//
+//	if (PauseEventFlag > 0)
+//	{
+//		//Tell Manager to pause other flagged events same as PauseEventFlag
+//		int32 tempBitMask = 1;
+//
+//		while (tempBitMask <= PauseEventFlag)
+//		{
+//			//If bit flag at specific location is on
+//			if (PauseEventFlag & tempBitMask)
+//			{
+//#if WITH_EDITOR
+//				GEngine->AddOnScreenDebugMessage(1111, 5, FColor::White, TEXT("Pausing Other Events With Flag"));
+//#endif
+//				//Iterates through all values associated with this specific bit flag
+//				for (auto Itr(EventMap.CreateKeyIterator(PauseEventFlag)); Itr; ++Itr)
+//				{
+//					Itr.Value()->TogglePause(true);
+//				}
+//			}
+//
+//			if (tempBitMask == PauseEventFlag)
+//			{
+//				break;
+//			}
+//
+//			tempBitMask <<= 1;
+//		}
+//	}
 
-	if (PauseEventFlag > 0)
-	{
-		//Tell Manager to pause other flagged events same as PauseEventFlag
-		int32 tempBitMask = 1;
-
-		while (tempBitMask <= PauseEventFlag)
-		{
-			//If bit flag at specific location is on
-			if (PauseEventFlag & tempBitMask)
-			{
-#if WITH_EDITOR
-				GEngine->AddOnScreenDebugMessage(1111, 5, FColor::White, TEXT("Pausing Other Events With Flag"));
-#endif
-				//Iterates through all values associated with this specific bit flag
-				for (auto Itr(EventMap.CreateKeyIterator(PauseEventFlag)); Itr; ++Itr)
-				{
-					Itr.Value()->TogglePause(true);
-				}
-			}
-
-			if (tempBitMask == PauseEventFlag)
-			{
-				break;
-			}
-
-			tempBitMask <<= 1;
-		}
-	}
+	UEventBlueprintFunctionLibrary::TogglePauseOtherEventObjects(EventObject, EventMap);
 }
 
 void AEventManager::EndEvent(IEventObjectInterface* EventObject)
 {
 	RemoveFromUpdateList(EventObject);
 
-	int32 EndEventFlag = EventObject->GetEndEventFlag();
+//	int32 EndEventFlag = EventObject->GetEndEventFlag();
+//
+//	if (EndEventFlag > 0)
+//	{
+//		//Tell Manager to end other flagged events same as EndEventFlag
+//		int32 tempBitMask = 1;
+//
+//		while (tempBitMask <= EndEventFlag)
+//		{
+//			//If bit flag at specific location is on
+//			if (EndEventFlag & tempBitMask)
+//			{
+//#if WITH_EDITOR
+//				GEngine->AddOnScreenDebugMessage(1111, 5, FColor::White, TEXT("Ending Other Events With Flag"));
+//#endif
+//				//Iterates through all values associated with this specific bit flag
+//				for (auto Itr(EventMap.CreateKeyIterator(EndEventFlag)); Itr; ++Itr)
+//				{
+//					IEventObjectInterface* eventObject = Itr.Value();
+//
+//					if (eventObject)
+//					{
+//						eventObject->End(true);
+//					}
+//				}
+//			}
+//
+//			if (tempBitMask == EndEventFlag)
+//			{
+//				break;
+//			}
+//
+//			tempBitMask <<= 1;
+//		}
+//
+//		RemoveAllFromUpdateList(EndEventFlag);
+//	}
 
-	if (EndEventFlag > 0)
-	{
-		//Tell Manager to end other flagged events same as EndEventFlag
-		int32 tempBitMask = 1;
-
-		while (tempBitMask <= EndEventFlag)
-		{
-			//If bit flag at specific location is on
-			if (EndEventFlag & tempBitMask)
-			{
-#if WITH_EDITOR
-				GEngine->AddOnScreenDebugMessage(1111, 5, FColor::White, TEXT("Ending Other Events With Flag"));
-#endif
-				//Iterates through all values associated with this specific bit flag
-				for (auto Itr(EventMap.CreateKeyIterator(EndEventFlag)); Itr; ++Itr)
-				{
-					IEventObjectInterface* eventObject = Itr.Value();
-
-					if (eventObject)
-					{
-						eventObject->End(true);
-					}
-				}
-			}
-
-			if (tempBitMask == EndEventFlag)
-			{
-				break;
-			}
-
-			tempBitMask <<= 1;
-		}
-
-		RemoveAllFromUpdateList(EndEventFlag);
-	}
+	UEventBlueprintFunctionLibrary::EndOtherEventObjects(this, EventObject, EventMap);
 }
 
 void AEventManager::RegisterEventObject(IEventObjectInterface* EventObject)

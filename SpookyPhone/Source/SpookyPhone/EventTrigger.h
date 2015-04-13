@@ -2,10 +2,8 @@
 
 #pragma once
 
-#include "EventManager.h"
-#include "SpookyGameMode.h"
+#include "EventBlueprintFunctionLibrary.h"
 #include "Engine.h"
-#include "EventObjectInterface.h"
 #include "Engine/TriggerBox.h"
 #include "EventTrigger.generated.h"
 

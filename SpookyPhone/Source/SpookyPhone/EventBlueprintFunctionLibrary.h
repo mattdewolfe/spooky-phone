@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "EventManager.h"
 #include "EventObjectInterface.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "EventBlueprintFunctionLibrary.generated.h"
@@ -23,4 +24,23 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Event)
 	static void EndEvent(const TScriptInterface<IEventObjectInterface> &target);
+
+	static AEventManager* GetEventManagerInst(UWorld* World);
+
+	static void StartEventObject(IEventObjectInterface* EventObject, bool shouldStartAlone);
+
+	static void EndEventObject(IEventObjectInterface* EventObject, bool shouldEndAlone);
+
+	static bool EventObjectTogglePause(IEventObjectInterface* EventObject, bool shouldTogglePauseAlone);
+
+	static void UpdateEventEventObjectMap(TMultiMap<int32, IEventObjectInterface*> &UpdateMap);
+
+	static void StartOtherEventObjects(AEventManager* EventManager, IEventObjectInterface* EventObject, TMultiMap<int32, IEventObjectInterface*> &EventMap);
+
+	static void TogglePauseOtherEventObjects(IEventObjectInterface* EventObject, TMultiMap<int32, IEventObjectInterface*> &EventMap);
+
+	static void EndOtherEventObjects(AEventManager* EventManager, IEventObjectInterface* EventObject, TMultiMap<int32, IEventObjectInterface*> &EventMap);
+
+private:
+	static AEventManager* EventManagerInst;
 };
