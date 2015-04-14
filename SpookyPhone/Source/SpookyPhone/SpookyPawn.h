@@ -39,11 +39,9 @@ public:
 	virtual void Tick(float _DeltaTime);
 
 public:
+	UStaticMesh* mesh;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Rendering)
 	UStaticMeshComponent* ChairMesh;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Physics)
-	UCapsuleComponent* ColliderComponent;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Phone)
 	UClass* PhoneClass;
@@ -53,6 +51,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Visibility)
 	void SetHideableGroupVisibility(bool newVisibility, uint8 groupToToggle);
+
+	// Will check if player dialed proper number, and set to false if they have not
+	UFUNCTION(BlueprintCallable, Category = WinConditions)
+	bool CheckVictory();
+
+	// Function to set victory flag when player has dialed out number
+	void FlagForVictory() {	bCanWinGame = true; }
 
 private:
 	// Instance of custom player controller for accessing properties
@@ -67,7 +72,8 @@ private:
 	void Use();	
 
 	bool bUsingPhone;
-
+	// Flag set when player is in right location to win by dialing out
+	bool bCanWinGame;
 	// Stores value from each axis 
 	float leftWheelMotion;
 	float rightWheelMotion;

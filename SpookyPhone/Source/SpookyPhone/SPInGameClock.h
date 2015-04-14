@@ -41,6 +41,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Timer)
 	float timeToPlay;
 
+	UFUNCTION(BlueprintCallable, Category = Timer)
+	float GetTimeRemainingInGame();
+
 private:
 	uint32 currentMinuteTime;
 	uint32 currentPower10SecondTime;

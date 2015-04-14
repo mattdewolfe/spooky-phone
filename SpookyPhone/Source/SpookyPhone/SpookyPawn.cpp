@@ -8,13 +8,8 @@
 ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
 	: Super(_ObjectInitializer)
 {
-//	ColliderComponent = _ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("ColliderComponent"));
-//	ColliderComponent->SetCapsuleSize(7.0f, 7.0f);
-//	RootComponent = ColliderComponent;
-
-//	MovementComponent = _ObjectInitializer.CreateDefaultSubobject<UFloatingPawnMovement>(this, TEXT("MovementComponent"));
-
 	PhoneClass = ASpookyPawn::StaticClass();
+
 	ConstructorHelpers::FObjectFinder<UBlueprint> PhoneBlueprint(TEXT("Blueprint'/Game/Blueprints/BP_SpookyPhone.BP_SpookyPhone'"));
 	if (PhoneBlueprint.Object != NULL)
 	{
@@ -29,6 +24,20 @@ ASpookyPawn::ASpookyPawn(const FObjectInitializer& _ObjectInitializer)
 	bUseControllerRotationRoll = true;
 
 	bUsingPhone = false;
+
+	//Asset, Reference Obtained Via Right Click in Editor
+	ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshOb(TEXT("StaticMesh'/Game/Meshes/rollstuhl4.rollstuhl4'"));
+	ConstructorHelpers::FObjectFinder<UMaterial> ChromeMat(TEXT("Material'/Game/Materials/Chrome_Mat.Chrome_Mat'"));
+
+	mesh = StaticMeshOb.Object;
+
+	ChairMesh = _ObjectInitializer.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("ChairMesh"));
+	ChairMesh->SetStaticMesh(mesh);
+	ChairMesh->SetWorldScale3D(FVector(35.0, 35.0, 35.0));
+	ChairMesh->SetRelativeLocation(FVector(0.0, 0, -35.0));
+	ChairMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	ChairMesh->SetMaterial(3, ChromeMat.Object);
+	ChairMesh->AttachTo(CapsuleComponent);
 }
 
 void ASpookyPawn::PostInitializeComponents()
@@ -36,10 +45,15 @@ void ASpookyPawn::PostInitializeComponents()
 	Super::PostInitializeComponents();
 }
 
+bool ASpookyPawn::CheckVictory()
+{
+	bool result = bCanWinGame;
+	bCanWinGame = false;
+	return result;
+}
+
 void ASpookyPawn::BeginPlay()
 {
-	Super::BeginPlay();
-
 	Super::BeginPlay();
 	// Store a reference to our player controller
 	playerController = Cast<ASpookyPlayerController>(Controller);
@@ -61,6 +75,8 @@ void ASpookyPawn::Tick(float _DeltaTime)
 
 	if (!bUsingPhone)
 		CalculateAndApplyMovement();
+
+	
 }
 
 // First attempt at tank controls for wheelchair.
@@ -87,7 +103,7 @@ void ASpookyPawn::CalculateAndApplyMovement()
 	else if (abs(rightWheelMotion) >= 0.1f && abs(leftWheelMotion) >= 0.1f)
 	{
 		AddControllerYawInput((leftWheelMotion + rightWheelMotion)*0.2);
-		AddMovementInput(playerController->GetViewRotation().Vector(), (leftWheelMotion - rightWheelMotion)*0.25);
+		AddMovementInput(playerController->GetControlRotation().Vector(), (leftWheelMotion - rightWheelMotion)*0.25);
 	}
 }
 
@@ -120,7 +136,7 @@ void ASpookyPawn::RightWheelMoved(float _value)
 
 void ASpookyPawn::MoveForward(float _value)
 {
-	AddMovementInput(GetControlRotation().Vector(), _value);
+	AddMovementInput(playerController->GetControlRotation().Vector(), _value);
 }
 
 void ASpookyPawn::Turn(float _value)
@@ -134,6 +150,18 @@ FRotator ASpookyPawn::GetViewRotation() const
 	if (ASpookyPlayerController* MYPC = Cast<ASpookyPlayerController>(Controller))
 	{
 		return MYPC->GetViewRotation();
+	}
+	else if (Role < ROLE_Authority)
+	{
+		// check if being spectated
+		for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
+		{
+			APlayerController* PlayerController = *Iterator;
+			if (PlayerController && PlayerController->PlayerCameraManager->GetViewTargetPawn() == this)
+			{
+				return PlayerController->BlendedTargetViewRotation;
+			}
+		}
 	}
 	return GetActorRotation();
 }

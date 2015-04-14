@@ -3,7 +3,6 @@
 #include "SpookyPhone.h"
 #include "HideableActor.h"
 
-
 // Sets default values
 AHideableActor::AHideableActor(const FObjectInitializer& _init)
 {

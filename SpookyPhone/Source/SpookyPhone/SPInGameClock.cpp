@@ -55,6 +55,12 @@ void ASPInGameClock::Tick( float DeltaTime )
 	UpdateClock();
 }
 
+float ASPInGameClock::GetTimeRemainingInGame()
+{
+	return timeRemaining;
+}
+
+
 void ASPInGameClock::UpdateClock()
 {
 	if (timeRemaining > 0)

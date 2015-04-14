@@ -2,6 +2,7 @@
 
 #include "SpookyPhone.h"
 #include "PhoneCallButtonWidget.h"
+#include "SpookyPawn.h"
 
 void UPhoneCallButtonWidget::Construct_Implementation()
 {
@@ -23,11 +24,11 @@ void UPhoneCallButtonWidget::OnAppClicked()
 
 void UPhoneCallButtonWidget::CheckNumber(FString PhoneNumber)
 {
-	FString Number = "(416) 724-3141";
+	FString Number = "402-6647";
 
 	if (PhoneNumber == Number)
 	{
-		// fire some event
-		UE_LOG(LogTemp, Warning, TEXT("Number dialed!"));
+		ASpookyPawn* temp = Cast<ASpookyPawn>(GetOwningPlayer()->GetPawn());
+		temp->FlagForVictory();
 	}
 }
