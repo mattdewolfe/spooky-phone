@@ -77,4 +77,6 @@ public:
 
 	UMaterial* cameraMaterial;
 	UTextureRenderTarget2D* renderTarget;
+
+	int32 numPictures;
 };

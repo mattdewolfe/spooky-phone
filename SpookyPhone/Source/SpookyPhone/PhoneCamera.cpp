@@ -108,9 +108,13 @@ bool APhoneCamera::TakePicture()
 
 	//push the material into our vector thereof. 
 	pictureGallery.push_back(dynamicMaterialInstance);
+
+	//tempRAW->ReleaseResource();
 	
 	//clean up pointers. 
-	delete tempRAW;
+	//delete tempRAW;
+
+	numPictures++;
 
 	return true;
 }
