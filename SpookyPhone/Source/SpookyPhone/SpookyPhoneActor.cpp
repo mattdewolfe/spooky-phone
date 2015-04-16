@@ -126,19 +126,27 @@ void ASpookyPhoneActor::GoToScreen(EScreens Screen)
 		Camera->SetActorTickEnabled(false);
 		ScreenMesh->SetMaterial(0, ScreenMaterial);
 	}
-	else if (Screen == EScreens::CAMERA)
+	else if (CurrentScreen == EScreens::GALLERY)
+	{
+		ScreenMesh->SetMaterial(0, ScreenMaterial);
+	}
+	
+	if (Screen == EScreens::CAMERA)
 	{
 		Camera->SetActorTickEnabled(true);
 		ScreenMesh->SetMaterial(0, Camera->cameraMaterial);
 	}
 
 	ScreenWidgetComponents[CurrentScreen]->SetVisibility(false);
+
+	ScreenWidgets[CurrentScreen]->Close();
 	ScreenWidgets[CurrentScreen]->Unselect();
 
 	CurrentScreen = Screen;
 	
 	ScreenWidgetComponents[CurrentScreen]->SetVisibility(true);
 
+	ScreenWidgets[CurrentScreen]->Open();
 	ScreenWidgets[CurrentScreen]->HoverApp();
 }
 
@@ -150,4 +158,9 @@ void ASpookyPhoneActor::NavigateByDirection(ENavigationDirection Direction)
 void ASpookyPhoneActor::Select()
 {
 	ScreenWidgets[CurrentScreen]->Select();
+}
+
+void ASpookyPhoneActor::SetScreenMaterial(UMaterialInstanceDynamic* Material)
+{
+	ScreenMesh->SetMaterial(0, Material);
 }

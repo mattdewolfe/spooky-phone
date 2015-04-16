@@ -27,6 +27,9 @@ public:
 	void Construct_Implementation() override;
 	void Init();
 
+	virtual void Open() {}
+	virtual void Close() {}
+
 	// select the next app in the widget
 	UFUNCTION()
 	void HoverNextApp(ENavigationDirection Direction);

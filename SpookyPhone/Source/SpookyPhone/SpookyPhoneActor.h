@@ -14,7 +14,8 @@ enum EScreens
 {
 	HOME,
 	CAMERA,
-	PHONE
+	PHONE,
+	GALLERY
 };
 
 UCLASS()
@@ -30,6 +31,11 @@ public:
 
 	void NavigateByDirection(ENavigationDirection Direction);
 	void Select();
+
+	void SetScreenMaterial(UMaterialInstanceDynamic* Material);
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
+	APhoneCamera* Camera;
 
 protected:
 	virtual void BeginPlay() override;
@@ -79,9 +85,6 @@ private:
 	TArray<UScreenWidget*> ScreenWidgets;
 
 	// Camera
-	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
-	APhoneCamera* Camera;
-
 	EScreens CurrentScreen;
 
 	UPROPERTY()

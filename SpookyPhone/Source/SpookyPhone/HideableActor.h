@@ -24,7 +24,8 @@ public:
 
 	// The group this objects belongs to. The visibility of all objects in the same group are toggled together. 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Visibility)
-		uint8 visibilityGroup;
+	uint8 visibilityGroup;
+
 private:
 	bool isVisible;	
 };
