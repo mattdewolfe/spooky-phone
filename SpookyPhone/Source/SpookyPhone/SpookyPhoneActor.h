@@ -31,6 +31,10 @@ public:
 	void NavigateByDirection(ENavigationDirection Direction);
 	void Select();
 
+	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
+	APhoneCamera* Camera;
+
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
@@ -79,8 +83,6 @@ private:
 	TArray<UScreenWidget*> ScreenWidgets;
 
 	// Camera
-	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
-	APhoneCamera* Camera;
 
 	EScreens CurrentScreen;
 
