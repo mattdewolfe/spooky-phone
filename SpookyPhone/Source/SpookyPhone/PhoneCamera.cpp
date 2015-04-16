@@ -11,6 +11,9 @@ APhoneCamera::APhoneCamera(const FObjectInitializer& ObjectInitializer) : Super(
 	ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> target(TEXT("Material'/Game/Textures/PhoneCamera'"));
 	renderTarget = target.Object;
 
+	ConstructorHelpers::FObjectFinder<UMaterial> material(TEXT("Material'/Game/Materials/Picture_Mat'"));
+	materialInstance = material.Object;
+
 	this->GetCaptureComponent2D()->TextureTarget = renderTarget;
 }
 
@@ -95,34 +98,51 @@ void APhoneCamera::SwitchFilter(FilterType _new)
 
 bool APhoneCamera::TakePicture()
 {
-	//snap a screenshot, save it to a texture. 
-	UTextureRenderTarget2D* tempRAW = new UTextureRenderTarget2D(FObjectInitializer());
-	tempRAW = this->GetCaptureComponent2D()->TextureTarget;
+	UTexture2D* tempTexture = new UTexture2D(FObjectInitializer());
+	EObjectFlags* objFlags = new EObjectFlags();
+	tempTexture = renderTarget->ConstructTexture2D(tempTexture, "tempTexture", (*objFlags), 0, nullptr);
 
 	//create a material with the texture data. 
-	std::string ts = "Material'/Game/Materials/kwParentGalleryMaterial.kwParentGalleryMaterial'";
-	std::wstring ws(ts.begin(), ts.end());
-	UMaterialInstance *tempMaterialInstance = LoadObject<UMaterialInstance>(NULL, ws.c_str()); // Returns NULL ?
-	UMaterialInstanceDynamic *dynamicMaterialInstance = UMaterialInstanceDynamic::Create(UMaterial::GetDefaultMaterial(MD_Surface), tempMaterialInstance);
-	dynamicMaterialInstance->SetTextureParameterValue("temptexture", tempRAW);
+	//std::string ts = "Material'/Game/Materials/kwParentGalleryMaterial.kwParentGalleryMaterial'";
+	//std::wstring ws(ts.begin(), ts.end());
+	//UMaterialInstance* tempMaterialInstance = LoadObject<UMaterialInstance>(NULL, ws.c_str()); // Returns NULL ?
 
+	UMaterialInstanceDynamic *dynamicMaterialInstance = UMaterialInstanceDynamic::Create(materialInstance, NULL);
+	dynamicMaterialInstance->SetTextureParameterValue(FName("tempTexture"), tempTexture);
 	//push the material into our vector thereof. 
 	pictureGallery.push_back(dynamicMaterialInstance);
-
-	//tempRAW->ReleaseResource();
-	
-	//clean up pointers. 
-	//delete tempRAW;
-
 	numPictures++;
-
 	return true;
+
+
+	////snap a screenshot, save it to a texture. 
+	//UTextureRenderTarget2D* tempRAW = new UTextureRenderTarget2D(FObjectInitializer());
+	//tempRAW = this->GetCaptureComponent2D()->TextureTarget;
+
+	////create a material with the texture data. 
+	//std::string ts = "Material'/Game/Materials/kwParentGalleryMaterial.kwParentGalleryMaterial'";
+	//std::wstring ws(ts.begin(), ts.end());
+	//UMaterialInstance *tempMaterialInstance = LoadObject<UMaterialInstance>(NULL, ws.c_str()); // Returns NULL ?
+	//UMaterialInstanceDynamic *dynamicMaterialInstance = UMaterialInstanceDynamic::Create(UMaterial::GetDefaultMaterial(MD_Surface), tempMaterialInstance);
+	//dynamicMaterialInstance->SetTextureParameterValue("temptexture", tempRAW);
+
+	////push the material into our vector thereof. 
+	//pictureGallery.push_back(dynamicMaterialInstance);
+
+	////tempRAW->ReleaseResource();
+	//
+	////clean up pointers. 
+	////delete tempRAW;
+
+	//numPictures++;
+
+	//return true;
 }
 
 UMaterialInstanceDynamic* APhoneCamera::DisplayPicture(int32 _index)
 {
 	//make sure it is a viable index. 
-	if (pictureGallery.size() > _index)
+	if (pictureGallery.size() < _index)
 	{
 		return NULL;
 	}

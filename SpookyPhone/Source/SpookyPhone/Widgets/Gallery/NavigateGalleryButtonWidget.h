@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Widgets/UIWidget.h"
+#include "Widgets/Gallery/GalleryScreenWidget.h"
 #include "NavigateGalleryButtonWidget.generated.h"
 
 /**
@@ -20,6 +21,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gallery)
 	TEnumAsByte<ENavigationDirection> Direction;
 
-	int32 PictureSelected;
-	int32 NumPictures;
+	UGalleryScreenWidget* GalleryScreen;
 };

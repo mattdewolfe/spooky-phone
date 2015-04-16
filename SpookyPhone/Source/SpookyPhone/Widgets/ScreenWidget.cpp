@@ -34,7 +34,8 @@ void UScreenWidget::Construct_Implementation()
 		UUIWidget* App = Cast<UUIWidget>(Widget);
 		if (App)
 		{
-			UIElements[App->RowNumber].Add(App);
+			if (UIElements.Num() > 0)
+				UIElements[App->RowNumber].Add(App);
 		}
 	}
 

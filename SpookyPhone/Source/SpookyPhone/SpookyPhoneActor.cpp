@@ -138,12 +138,15 @@ void ASpookyPhoneActor::GoToScreen(EScreens Screen)
 	}
 
 	ScreenWidgetComponents[CurrentScreen]->SetVisibility(false);
+
+	ScreenWidgets[CurrentScreen]->Close();
 	ScreenWidgets[CurrentScreen]->Unselect();
 
 	CurrentScreen = Screen;
 	
 	ScreenWidgetComponents[CurrentScreen]->SetVisibility(true);
 
+	ScreenWidgets[CurrentScreen]->Open();
 	ScreenWidgets[CurrentScreen]->HoverApp();
 }
 
