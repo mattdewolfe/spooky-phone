@@ -25,7 +25,9 @@ public:
 	virtual void SetViewRotation(const FRotator& NewRotation);
 
 	virtual void SetControlRotation(const FRotator& NewRotation) override;
-
+	
+	UPROPERTY(BlueprintReadWrite, Category = "Var")
+	bool isInService;
 protected:
 
 	/**
