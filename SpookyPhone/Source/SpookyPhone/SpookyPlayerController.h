@@ -26,6 +26,9 @@ public:
 
 	virtual void SetControlRotation(const FRotator& NewRotation) override;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Cell Bars")
+	bool isInService;
+
 protected:
 
 	/**

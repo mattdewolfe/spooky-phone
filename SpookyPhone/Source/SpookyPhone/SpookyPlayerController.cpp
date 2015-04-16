@@ -11,7 +11,7 @@ void ASpookyPlayerController::BeginPlay()
 	//bShowMouseCursor = false;
 	//bEnableClickEvents = false;
 	//bEnableMouseOverEvents = false;
-
+	isInService = false;
 	DisableInput(this);
 }
 

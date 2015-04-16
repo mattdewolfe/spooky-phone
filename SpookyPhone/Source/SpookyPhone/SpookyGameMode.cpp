@@ -18,7 +18,7 @@ ASpookyGameMode::ASpookyGameMode(const FObjectInitializer& _ObjectInitializer)
 		MyPawnClass = (UClass*)PawnBlueprint.Object->GeneratedClass;
 	}
 	// Set the pawn
-	DefaultPawnClass = ASpookyPawn::StaticClass();
+	DefaultPawnClass = MyPawnClass;
 	PlayerControllerClass = ASpookyPlayerController::StaticClass();
 }
 

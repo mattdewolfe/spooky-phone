@@ -15,6 +15,8 @@ APhoneCamera::APhoneCamera(const FObjectInitializer& ObjectInitializer) : Super(
 	materialInstance = material.Object;
 
 	this->GetCaptureComponent2D()->TextureTarget = renderTarget;
+	this->GetCaptureComponent2D()->CaptureSource = SCS_FinalColorLDR;
+	this->GetCaptureComponent2D()->bCaptureEveryFrame = true;
 }
 
 void APhoneCamera::BeginPlay()
@@ -58,6 +60,14 @@ void APhoneCamera::SwitchFilter(FilterType _new)
 
 	FPostProcessSettings temp = this->GetCaptureComponent2D()->PostProcessSettings;
 
+	temp.bOverride_VignetteIntensity = true;
+	temp.bOverride_VignetteColor = true;
+	temp.bOverride_GrainIntensity = true;
+	temp.bOverride_SceneColorTint = true;
+	temp.bOverride_FilmSaturation = true;
+	temp.bOverride_FilmContrast = true;
+	temp.bOverride_AutoExposureBias = true;
+
 	//adjust camera options according to the currentFilter (tiny, staticyness, etc.)
 	switch (currentFilter)
 	{
@@ -66,24 +76,27 @@ void APhoneCamera::SwitchFilter(FilterType _new)
 		temp.VignetteColor = FLinearColor(0.0f, 0.0f, 0.0f);
 		temp.GrainIntensity = 0.0f;
 		temp.SceneColorTint = FLinearColor(1.0f, 1.0f, 1.0f);
-		temp.FilmSaturation = 0.0;
-		temp.FilmContrast = 0.0f; 
+		temp.FilmSaturation = 1.0;
+		temp.FilmContrast = 1.0f;
+		temp.AutoExposureBias = 1.0f;
 		break;
 	case FilterType::VE_NIGHT:
-		temp.VignetteIntensity = 0.8f;
+		temp.VignetteIntensity = 0.45f;
 		temp.VignetteColor = FLinearColor(0.0f, 0.0f, 0.0f);
-		temp.GrainIntensity = 0.8f;
+		temp.GrainIntensity = 0.4f;
 		temp.SceneColorTint = FLinearColor(0.2f, 1.0f, 0.0f);
-		temp.FilmSaturation = 0.0;
-		temp.FilmContrast = 0.0f;
+		temp.FilmSaturation = 10.0;
+		temp.FilmContrast = 50.0f;
+		temp.AutoExposureBias = 5.0f;
 		break;
 	case FilterType::VE_SPOOKY:
 		temp.VignetteIntensity = 0.0f;
 		temp.VignetteColor = FLinearColor(0.0f, 0.0f, 0.0f);
 		temp.GrainIntensity = 2.0f;
 		temp.SceneColorTint = FLinearColor(1.0f, 0.155f, 1.0f);
-		temp.FilmSaturation = 1.5;
+		temp.FilmSaturation = 1.5f;
 		temp.FilmContrast = 1.0f;
+		temp.AutoExposureBias = 0;
 		break;
 	default:
 		break;
