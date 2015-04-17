@@ -40,7 +40,7 @@ void UEventBlueprintFunctionLibrary::EndEvent(const TScriptInterface<IEventObjec
 
 AEventManager* UEventBlueprintFunctionLibrary::GetEventManagerInst(UWorld* World)
 {
-	if (!EventManagerInst)
+	if (!EventManagerInst->IsValidLowLevel())
 	{
 		EventManagerInst = World->SpawnActor<AEventManager>();
 	}
