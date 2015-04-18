@@ -29,14 +29,14 @@ class IEventObjectInterface
 public:
 	virtual void Init();
 
-	virtual void Start(bool shouldStartAlone);
+	virtual void Start(bool shouldStartAlone = true);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Event)
 	void EventUpdate();
 
-	virtual bool TogglePause(bool shouldTogglePauseAlone);
+	virtual bool TogglePause(bool shouldTogglePauseAlone = true);
 
-	virtual void End(bool shouldEndAlone);
+	virtual void End(bool shouldEndAlone = true);
 
 	FORCEINLINE void SetManager(AEventManager *EventManager) { Manager = EventManager; }
 
